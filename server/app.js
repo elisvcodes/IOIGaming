@@ -8,8 +8,12 @@ require('./db/db');
 // required Middlewares
 app.use(cors());
 app.use(express.json());
+app.use(express.static(__dirname + '/public'));
 
 // User Middleware
 app.use('/api/v1/user', require('./routes/user'));
+
+// Category middleware
+app.use('/api/v1/category', require('./routes/category'));
 
 app.listen(7000);
