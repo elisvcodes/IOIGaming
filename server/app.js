@@ -16,4 +16,7 @@ app.use('/api/v1/user', require('./routes/user'));
 // Category middleware
 app.use('/api/v1/category', require('./routes/category'));
 
+// Product middleware
+app.use('/api/v1/product', require('./routes/product'));
+
 app.listen(7000);
