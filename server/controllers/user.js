@@ -7,7 +7,8 @@ exports.signup = (req, res) => {
       return res.status(400).json(err);
     }
     result.generateToken();
-    res.status(200).json(result);
+    const token = result.tokens[result.tokens.length - 1].token;
+    res.status(200).cookie('user_token_jwt', token).json(result);
   });
 };
 
@@ -21,7 +22,8 @@ exports.login = (req, res) => {
     const correctPassword = await user.checkPassword(password);
     if (correctPassword) {
       user.generateToken();
-      res.status(200).json(user);
+      const token = user.tokens[user.tokens.length - 1].token;
+      res.status(200).cookie('user_token_jwt', token).json(user);
     } else {
       res.status(200).json('Bad Login');
     }
