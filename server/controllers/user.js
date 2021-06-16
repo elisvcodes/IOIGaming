@@ -29,3 +29,23 @@ exports.login = (req, res) => {
     }
   });
 };
+
+exports.logout = (req, res) => {
+  User.findOne({ _id: req.user._id }).exec((err, user) => {
+    if (err) {
+      return res.status(400).json(err);
+    }
+    user.tokens = user.tokens.filter(
+      (token) => token.token !== req.cookies.user_token_jwt
+    );
+    user.save((err, result) => {
+      if (err) {
+        return res.status(400).json(err);
+      }
+      res
+        .status(200)
+        .clearCookie('user_token_jwt')
+        .json({ msg: 'Logged out successfully' });
+    });
+  });
+};
