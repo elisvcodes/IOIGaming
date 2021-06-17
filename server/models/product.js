@@ -4,6 +4,7 @@ const productSchema = new mongoose.Schema(
   {
     owner: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
     name: { type: String, require: true },
+    slug: { type: String, require: true, unique: true },
     shortDescription: { type: String },
     longDescription: { type: String, require: true },
     categoryId: { type: mongoose.Schema.Types.ObjectId, ref: 'Category' },
