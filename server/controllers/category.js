@@ -6,7 +6,9 @@ exports.createCategory = (req, res) => {
     owner: req.user._id,
     name: req.body.name,
     description: req.body.description,
-    slug: slugify(req.body.name, { replacement: '-', lower: true }),
+    slug: req.body.slug
+      ? slugify(req.body.slug, { replacement: '-', lower: true })
+      : slugify(req.body.name, { replacement: '-', lower: true }),
   };
 
   if (req.body.parentId) {
