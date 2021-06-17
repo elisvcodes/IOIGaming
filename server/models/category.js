@@ -3,9 +3,9 @@ const mongoose = require('mongoose');
 const categorySchema = new mongoose.Schema(
   {
     owner: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-    name: { type: String, required: true },
+    name: { type: String, required: true, unique: true },
     description: { type: String, required: true },
-    slug: { type: String, required: true },
+    slug: { type: String, required: true, unique: true },
     parentId: { type: String },
     categoryImg: { type: String },
   },
