@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
-
+const path = require('path');
 const app = express();
 
 require('./db/db');
@@ -10,7 +10,7 @@ require('./db/db');
 app.use(cors({ credentials: true, origin: 'http://localhost:3000' }));
 app.use(express.json());
 app.use(cookieParser());
-app.use(express.static(__dirname + '/public'));
+app.use('/public', express.static(path.join(__dirname, 'public')));
 
 // User Middleware
 app.use('/api/v1/user', require('./routes/user'));
