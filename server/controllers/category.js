@@ -64,7 +64,6 @@ exports.getCategories = (req, res) => {
 };
 
 exports.updateCategory = (req, res) => {
-  console.log(req.body);
   const data = {
     _id: req.body._id,
     name: req.body.name,
