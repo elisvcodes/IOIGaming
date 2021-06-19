@@ -63,6 +63,33 @@ exports.getCategories = (req, res) => {
   });
 };
 
+exports.updateCategory = (req, res) => {
+  console.log(req.body);
+  const data = {
+    _id: req.body._id,
+    name: req.body.name,
+    description: req.body.description,
+    slug: req.body.slug,
+  };
+
+  if (req.body.parentId !== req.body._id) {
+    data.parentId = req.body.parentId;
+  }
+
+  if (req.file) {
+    data.categoryImg = req.file.filename;
+  }
+
+  Category.findOneAndUpdate({ _id: data._id }, data, {
+    returnOriginal: false,
+  }).exec((err, result) => {
+    if (err) {
+      return res.status(400).json({ msg: err });
+    }
+    res.status(200).json(result);
+  });
+};
+
 exports.deleteCategory = (req, res) => {
   Category.findOneAndDelete({ _id: req.params.id }).exec((err, result) => {
     if (err) {
