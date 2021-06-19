@@ -8,6 +8,7 @@ import {
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import Layout from '../../components/Layout';
+import Inputs from '../../components/UI/inputs/index';
 import { login } from '../../_actions/auth';
 import { useSelector } from 'react-redux';
 import { Redirect } from 'react-router';
@@ -44,8 +45,8 @@ export default function Login() {
     <>
       <Layout>
         <form onSubmit={onSubmit}>
-          <FormControl fullWidth>
-            <TextField
+          <div>
+            <Inputs
               type="email"
               name="email"
               label="email"
@@ -53,11 +54,13 @@ export default function Login() {
               className={classes.input}
               value={creds.email}
               onChange={onChange}
+              fullWidth
+              required={true}
             />
-          </FormControl>
+          </div>
 
-          <FormControl fullWidth>
-            <TextField
+          <div>
+            <Inputs
               type="password"
               name="password"
               label="password"
@@ -65,8 +68,10 @@ export default function Login() {
               className={classes.input}
               value={creds.password}
               onChange={onChange}
+              fullWidth
+              required={true}
             />
-          </FormControl>
+          </div>
 
           <Button type="submit" variant="contained">
             Submit
