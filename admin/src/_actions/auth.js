@@ -2,7 +2,9 @@ import * as API from '../_api/auth';
 import Cookies from 'js-cookie';
 export const login = (creds) => async (dispatch) => {
   const { data, status } = await API.login(creds);
-  if (status === 200) {
+  if (!Cookies.get('user_token_jwt')) {
+    dispatch({ type: 'isLoggedIn', payload: false });
+  } else if (status === 200) {
     dispatch({ type: 'AUTH', payload: data });
   }
 };
