@@ -12,6 +12,7 @@ import Inputs from '../../components/UI/inputs/index';
 import { login } from '../../_actions/auth';
 import { useSelector } from 'react-redux';
 import { Redirect } from 'react-router';
+import Form from '../../components/UI/Form/index';
 const useStyles = makeStyles({
   input: {
     margin: '10px 0',
@@ -41,42 +42,34 @@ export default function Login() {
     return <Redirect to="/" />;
   }
 
+  const fields = [
+    {
+      type: 'email',
+      name: 'email',
+      label: 'email',
+      variant: 'outlined',
+      className: classes.input,
+      value: creds.email,
+      onChange,
+      fullWidth: true,
+      required: true,
+    },
+    {
+      type: 'password',
+      name: 'password',
+      label: 'password',
+      variant: 'outlined',
+      value: creds.password,
+      onChange,
+      fullWidth: true,
+      required: true,
+    },
+  ];
+
   return (
     <>
       <Layout>
-        <form onSubmit={onSubmit}>
-          <div>
-            <Inputs
-              type="email"
-              name="email"
-              label="email"
-              variant="outlined"
-              className={classes.input}
-              value={creds.email}
-              onChange={onChange}
-              fullWidth
-              required={true}
-            />
-          </div>
-
-          <div>
-            <Inputs
-              type="password"
-              name="password"
-              label="password"
-              variant="outlined"
-              className={classes.input}
-              value={creds.password}
-              onChange={onChange}
-              fullWidth
-              required={true}
-            />
-          </div>
-
-          <Button type="submit" variant="contained">
-            Submit
-          </Button>
-        </form>
+        <Form onSubmit={(e) => onSubmit(e)} fields={fields} />
       </Layout>
     </>
   );
