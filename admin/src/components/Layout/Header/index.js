@@ -8,6 +8,9 @@ import {
   makeStyles,
 } from '@material-ui/core';
 
+import { useSelector, useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import { logout } from '../../../_actions/auth';
 const useStyles = makeStyles({
   root: {
     display: 'flex',
@@ -15,6 +18,9 @@ const useStyles = makeStyles({
 });
 export default function Header() {
   const classes = useStyles();
+  const auth = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+  const history = useHistory();
   return (
     <>
       <AppBar position="static">
@@ -23,7 +29,13 @@ export default function Header() {
             Admin Area
           </Typography>
           <MenuItem>
-            <Button color="inherit">Logout</Button>
+            {auth.isLoggedIn ? (
+              <Button color="inherit" onClick={() => dispatch(logout(history))}>
+                Logout
+              </Button>
+            ) : (
+              <Button color="inherit">Login</Button>
+            )}
           </MenuItem>
         </Toolbar>
       </AppBar>
