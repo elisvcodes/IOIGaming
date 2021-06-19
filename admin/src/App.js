@@ -6,14 +6,16 @@ import Categories from './pages/Categories/index';
 import Login from './pages/Login/index';
 import { useDispatch } from 'react-redux';
 import { isLoggedIn } from './_actions/auth';
+import { getCategories } from './_actions/category';
 import Privateroute from './components/HOF/Privateroute.js';
-
+import Cookies from 'js-cookie';
 function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    dispatch(getCategories());
     dispatch(isLoggedIn());
-  });
+  }, []);
   return (
     <>
       <Switch>
