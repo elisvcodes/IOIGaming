@@ -17,6 +17,7 @@ const displayCategory = (categories, parentId = null) => {
       name: cat.name,
       description: cat.description,
       slug: cat.slug,
+      categoryImg: cat.categoryImg,
       parentId: cat.parentId,
       children: displayCategory(categories, cat._id),
     });
@@ -59,5 +60,14 @@ exports.getCategories = (req, res) => {
     }
     const list = displayCategory(result);
     res.status(200).json(list);
+  });
+};
+
+exports.deleteCategory = (req, res) => {
+  Category.findOneAndDelete({ _id: req.params.id }).exec((err, result) => {
+    if (err) {
+      return res.status(400).json({ msg: err });
+    }
+    res.status(200).json({ msg: 'deleted successfully' });
   });
 };
