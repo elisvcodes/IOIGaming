@@ -2,7 +2,11 @@ const express = require('express');
 const multer = require('multer');
 const path = require('path');
 const router = express.Router();
-const { createCategory, getCategories } = require('../controllers/category');
+const {
+  createCategory,
+  getCategories,
+  deleteCategory,
+} = require('../controllers/category');
 const { protected } = require('../middleware/auth');
 
 let storage = multer.diskStorage({
@@ -18,5 +22,5 @@ let upload = multer({ storage: storage });
 
 router.post('/create', protected, upload.single('categoryImg'), createCategory);
 router.get('/', getCategories);
-
+router.delete('/:id', protected, deleteCategory);
 module.exports = router;
