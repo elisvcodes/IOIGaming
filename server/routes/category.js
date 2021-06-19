@@ -6,6 +6,7 @@ const {
   createCategory,
   getCategories,
   deleteCategory,
+  updateCategory,
 } = require('../controllers/category');
 const { protected } = require('../middleware/auth');
 
@@ -22,5 +23,11 @@ let upload = multer({ storage: storage });
 
 router.post('/create', protected, upload.single('categoryImg'), createCategory);
 router.get('/', getCategories);
+router.patch(
+  '/update',
+  protected,
+  upload.single('categoryImg'),
+  updateCategory
+);
 router.delete('/:id', protected, deleteCategory);
 module.exports = router;
