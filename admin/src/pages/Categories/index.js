@@ -18,7 +18,9 @@ import {
   deleteCategory,
   updateCategory,
 } from '../../_actions/category';
-import { GrDocumentMissing } from 'react-icons/gr';
+import { GrDocumentImage } from 'react-icons/gr';
+import DataTable from '../../components/UI/DataTable/index';
+import Form from '../../components/UI/Form';
 const useStyles = makeStyles((theme) => ({
   formControl: {
     minWidth: 120,
@@ -37,8 +39,7 @@ export default function Categories() {
   });
 
   const [requestUpdate, setRequestUpdate] = useState(false);
-  console.log(requestUpdate);
-  const [catImg, setCatImg] = useState(null);
+  const [catImg, setCatImg] = useState('');
   const dispatch = useDispatch();
   const categories = useSelector((state) => state.categories);
 
@@ -70,7 +71,6 @@ export default function Categories() {
     }
 
     setCatData({ _id: '', name: '', description: '', parentId: '', slug: '' });
-    setCatImg('');
   };
 
   const flattenCategories = (categories, options = []) => {
@@ -123,7 +123,7 @@ export default function Categories() {
       width: 125,
       renderCell: (params) => {
         return params.value === 'undefined' ? (
-          <GrDocumentMissing size={30} style={{ marginRight: 'auto' }} />
+          <GrDocumentImage size={30} style={{ marginRight: 'auto' }} />
         ) : (
           <Avatar
             src={` http://localhost:7000/public/media/categories/${params.value}`}
@@ -184,86 +184,61 @@ export default function Categories() {
     },
   ];
 
+  const inputFields = [
+    {
+      type: 'text',
+      name: 'name',
+      label: 'name',
+      variant: 'outlined',
+      fullWidth: true,
+      onChange,
+      value: catData.name,
+    },
+    {
+      type: 'text',
+      name: 'slug',
+      label: 'slug',
+      variant: 'outlined',
+      fullWidth: true,
+      onChange,
+      value: catData.slug,
+    },
+    {
+      type: 'text',
+      name: 'description',
+      label: 'description',
+      variant: 'outlined',
+      fullWidth: true,
+      onChange,
+      value: catData.description,
+      multiline: true,
+      rows: 4,
+    },
+    {
+      name: 'parentId',
+      label: 'parentId',
+      variant: 'outlined',
+      fullWidth: true,
+      onChange,
+      value: catData.parentId,
+      select: flattenCategories(categories),
+    },
+    {
+      type: 'file',
+      name: 'categoryImg',
+      variant: 'outlined',
+      fullWidth: true,
+      onChange: imgOnChange,
+    },
+  ];
+
   return (
     <>
       <Layout sidebar>
         <h3>Product Categories</h3>
         <Grid container>
           <Grid item xs={12} md={3}>
-            <form onSubmit={onChange} onSubmit={onSubmit}>
-              <Inputs
-                type="text"
-                name="name"
-                label="name"
-                variant="outlined"
-                fullWidth
-                onChange={onChange}
-                value={catData.name}
-              />
-
-              <Inputs
-                type="text"
-                name="slug"
-                label="slug"
-                variant="outlined"
-                fullWidth
-                onChange={onChange}
-                value={catData.slug}
-              />
-
-              <Inputs
-                type="text"
-                name="description"
-                label="description"
-                variant="outlined"
-                fullWidth
-                multiline
-                rows={4}
-                onChange={onChange}
-                value={catData.description}
-              />
-              <FormControl
-                fullWidth
-                variant="outlined"
-                className={classes.formControl}
-                style={{ margin: '10px 0' }}
-              >
-                <InputLabel id="parentId">Select ParentId</InputLabel>
-
-                <Select
-                  labelId="parentId"
-                  // label="parentId"
-                  id="parentId"
-                  labelWidth={120}
-                  value={catData.parentId}
-                  name="parentId"
-                  onChange={onChange}
-                  value={catData.parentId}
-                >
-                  <MenuItem value="">Select</MenuItem>
-
-                  {flattenCategories(categories).map((item) => {
-                    return (
-                      <MenuItem value={item.value} key={item.value}>
-                        {item.name}
-                      </MenuItem>
-                    );
-                  })}
-                </Select>
-              </FormControl>
-
-              <InputLabel>Catgeory Image</InputLabel>
-              <Inputs
-                type="file"
-                name="categoryImg"
-                variant="outlined"
-                fullWidth
-                onChange={imgOnChange}
-              />
-              <Button type="submit" variant="contained" color="primary">
-                Submit
-              </Button>
-            </form>
+            <Form onSubmit={onSubmit} fields={inputFields} />
           </Grid>
           <Grid
             item
