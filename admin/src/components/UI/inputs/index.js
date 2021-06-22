@@ -1,12 +1,11 @@
-import { TextField, makeStyles } from '@material-ui/core';
+import { TextField, makeStyles, MenuItem, Input } from '@material-ui/core';
 import React from 'react';
 
-const useStyles = makeStyles({
-  root: {},
-  alignments: {
-    margin: '10px 0',
+const useStyles = makeStyles((theme) => ({
+  textField: {
+    width: '48.5%',
   },
-});
+}));
 
 export default function Inputs({
   name,
@@ -20,8 +19,11 @@ export default function Inputs({
   required,
   multiline,
   rows,
+  width,
+  select,
 }) {
   const classes = useStyles();
+
   return (
     <>
       <TextField
@@ -32,11 +34,19 @@ export default function Inputs({
         value={value}
         fullWidth={fullWidth}
         onChange={onChange}
-        className={className ? className : classes.alignments}
+        className={width && classes.textField}
         required={required}
         multiline={multiline}
         rows={rows}
-      />
+        select={select}
+      >
+        {select &&
+          select.map((option) => (
+            <MenuItem key={option.value} value={option.value}>
+              {option.name}
+            </MenuItem>
+          ))}
+      </TextField>
     </>
   );
 }
