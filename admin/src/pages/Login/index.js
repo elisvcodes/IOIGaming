@@ -1,13 +1,7 @@
-import {
-  Button,
-  FormControl,
-  TextField,
-  Container,
-  makeStyles,
-} from '@material-ui/core';
+import { makeStyles } from '@material-ui/core';
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import Layout from '../../components/Layout';
+import Layout from '../../components/Layout/index';
 import Inputs from '../../components/UI/inputs/index';
 import { login } from '../../_actions/auth';
 import { useSelector } from 'react-redux';
