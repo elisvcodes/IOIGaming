@@ -10,7 +10,6 @@ import {
   updateCategory,
 } from '../../_actions/category';
 import { GrDocumentImage } from 'react-icons/gr';
-import DataTable from '../../components/UI/DataTable/index';
 import Form from '../../components/UI/Form';
 
 const useStyles = makeStyles((theme) => ({
