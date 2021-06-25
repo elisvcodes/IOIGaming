@@ -1,13 +1,4 @@
-import {
-  Grid,
-  Select,
-  MenuItem,
-  InputLabel,
-  FormControl,
-  makeStyles,
-  Button,
-  Avatar,
-} from '@material-ui/core';
+import { Grid, makeStyles, Button, Avatar } from '@material-ui/core';
 import { DataGrid } from '@material-ui/data-grid';
 import React, { useState } from 'react';
 import Layout from '../../components/Layout/index';
@@ -21,9 +12,15 @@ import {
 import { GrDocumentImage } from 'react-icons/gr';
 import DataTable from '../../components/UI/DataTable/index';
 import Form from '../../components/UI/Form';
+
 const useStyles = makeStyles((theme) => ({
   formControl: {
     minWidth: 120,
+  },
+  operations: {
+    '& a': {
+      margin: '0 10px',
+    },
   },
 }));
 
@@ -94,8 +91,7 @@ export default function Categories() {
         name: cat.name,
         description: cat.description,
         slug: cat.slug,
-        edit: 'Edit',
-        delete: 'Delete',
+        actions: 'Operations',
       });
       if (cat.children) {
         rows(cat.children, options);
@@ -103,8 +99,6 @@ export default function Categories() {
     }
     return options;
   };
-
-  const updatedRows = rows(categories);
 
   const initUpdate = (rows, id) => {
     const result = rows.find((item) => item.id === id);
@@ -127,8 +121,12 @@ export default function Categories() {
         ) : (
           <Avatar
             src={` http://localhost:7000/public/media/categories/${params.value}`}
-            variant="square"
-            style={{ height: '50px', width: '50px', marginRight: 'auto' }}
+            variant='square'
+            style={{
+              height: '50px',
+              width: '50px',
+              marginRight: 'auto',
+            }}
           />
         );
       },
@@ -149,36 +147,34 @@ export default function Categories() {
       width: 125,
     },
     {
-      field: 'edit',
-      headerName: 'EDIT',
-      width: 125,
-      renderCell: (params) => {
-        return (
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={() => {
-              return setRequestUpdate(true), initUpdate(updatedRows, params.id);
-            }}
-          >
-            {params.value}
-          </Button>
-        );
-      },
-    },
-    {
-      field: 'delete',
-      headerName: 'DELETE',
+      field: 'actions',
+      headerName: 'ACTIONS',
       width: 150,
       renderCell: (params) => {
         return (
-          <Button
-            variant="contained"
-            color="secondary"
-            onClick={() => dispatch(deleteCategory(params.id))}
-          >
-            {params.value}
-          </Button>
+          <div className={classes.operations}>
+            <a
+              href=''
+              onClick={(e) => {
+                e.preventDefault();
+                return (
+                  setRequestUpdate(true),
+                  initUpdate(rows(categories), params.id)
+                );
+              }}
+            >
+              Edit
+            </a>
+            <a
+              href=''
+              onClick={(e) => {
+                e.preventDefault();
+                return dispatch(deleteCategory(params.id));
+              }}
+            >
+              Delete
+            </a>
+          </div>
         );
       },
     },
@@ -247,7 +243,7 @@ export default function Categories() {
             style={{ marginLeft: '30px', marginTop: '10px' }}
           >
             <DataGrid
-              rows={updatedRows}
+              rows={rows(categories)}
               columns={columns}
               pagination
               pageSize={7}
