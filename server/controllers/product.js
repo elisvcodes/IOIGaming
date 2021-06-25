@@ -5,11 +5,12 @@ exports.createProduct = (req, res) => {
   const data = {
     owner: req.user._id,
     name: req.body.name,
+    slug: req.body.slug ? req.body.slug : req.body.name,
     longDescription: req.body.longDescription,
     categoryId: req.body.categoryId,
     price: req.body.price,
     sku: req.body.sku,
-    qunatity: req.body.quantity,
+    quantity: req.body.quantity,
   };
 
   if (req.body.shortDescription) {
@@ -35,6 +36,49 @@ exports.createProduct = (req, res) => {
 
 exports.getProducts = (req, res) => {
   Product.find({}).exec((err, result) => {
+    if (err) {
+      return res.status(400).json(err);
+    }
+    res.status(200).json(result);
+  });
+};
+
+exports.updateProduct = (req, res) => {
+  console.log(req.body);
+  const data = {
+    id: req.body._id,
+    name: req.body.name,
+    slug: req.body.slug ? req.body.slug : req.body.name,
+    longDescription: req.body.longDescription,
+    categoryId: req.body.categoryId,
+    price: req.body.price,
+    sku: req.body.sku,
+    quantity: req.body.quantity,
+  };
+
+  if (req.body.shortDescription) {
+    data.shortDescription = req.body.shortDescription;
+  }
+
+  if (req.files) {
+    data.productImg = req.files.map((img) => {
+      return {
+        img: img.filename,
+      };
+    });
+    Product.findOneAndUpdate({ _id: data.id }, data, {
+      returnOriginal: false,
+    }).exec((err, result) => {
+      if (err) {
+        return res.status(400).json(err);
+      }
+      res.status(200).json(result);
+    });
+  }
+};
+
+exports.deleteProduct = (req, res) => {
+  Product.findOneAndDelete({ _id: req.params.id }).exec((err, result) => {
     if (err) {
       return res.status(400).json(err);
     }
