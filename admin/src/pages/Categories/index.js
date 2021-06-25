@@ -243,10 +243,11 @@ export default function Categories() {
             style={{ marginLeft: '30px', marginTop: '10px' }}
           >
             <DataGrid
+              autoHeight
               rows={rows(categories)}
               columns={columns}
               pagination
-              pageSize={7}
+              pageSize={10}
             />
           </Grid>
         </Grid>
