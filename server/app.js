@@ -24,4 +24,7 @@ app.use('/api/v1/product', require('./routes/product'));
 // Cart middleware
 app.use('/api/v1/cart', require('./routes/cart'));
 
+// Page middleware
+app.use('/api/v1/page', require('./routes/page'));
+
 app.listen(7000);
