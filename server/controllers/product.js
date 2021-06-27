@@ -44,7 +44,6 @@ exports.getProducts = (req, res) => {
 };
 
 exports.updateProduct = (req, res) => {
-  console.log(req.body);
   const data = {
     id: req.body._id,
     name: req.body.name,
