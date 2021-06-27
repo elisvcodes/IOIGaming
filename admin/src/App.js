@@ -10,6 +10,8 @@ import { getCategories } from './_actions/category';
 import { getProducts } from './_actions/product';
 import Privateroute from './components/HOF/Privateroute.js';
 import Cookies from 'js-cookie';
+import { CssBaseline } from '@material-ui/core';
+
 function App() {
   const dispatch = useDispatch();
 
@@ -20,6 +22,7 @@ function App() {
   }, []);
   return (
     <>
+      <CssBaseline />
       <Switch>
         <Privateroute exact path='/' component={Homepage} />
         <Privateroute path='/categories' component={Categories} />
