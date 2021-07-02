@@ -1,11 +1,14 @@
 const Category = require('../models/category');
 const Product = require('../models/product');
+const slugify = require('slugify');
 
 exports.createProduct = (req, res) => {
   const data = {
     owner: req.user._id,
     name: req.body.name,
-    slug: req.body.slug ? req.body.slug : req.body.name,
+    slug: req.body.slug
+      ? slugify(req.body.slug, { replacement: '-', lower: true })
+      : slugify(req.body.name, { replacement: '-', lower: true }),
     longDescription: req.body.longDescription,
     categoryId: req.body.categoryId,
     price: req.body.price,
@@ -45,6 +48,7 @@ exports.getProducts = (req, res) => {
 
 exports.updateProduct = (req, res) => {
   const data = {
+    owner: req.user._id,
     id: req.body._id,
     name: req.body.name,
     slug: req.body.slug ? req.body.slug : req.body.name,
@@ -59,12 +63,13 @@ exports.updateProduct = (req, res) => {
     data.shortDescription = req.body.shortDescription;
   }
 
-  if (req.files) {
+  if (req.files.length > 0) {
     data.productImg = req.files.map((img) => {
       return {
         img: img.filename,
       };
     });
+
     Product.findOneAndUpdate({ _id: data.id }, data, {
       returnOriginal: false,
     }).exec((err, result) => {
