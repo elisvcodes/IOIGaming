@@ -1,4 +1,3 @@
-const Category = require('../models/category');
 const Product = require('../models/product');
 const slugify = require('slugify');
 
@@ -69,16 +68,17 @@ exports.updateProduct = (req, res) => {
         img: img.filename,
       };
     });
-
-    Product.findOneAndUpdate({ _id: data.id }, data, {
-      returnOriginal: false,
-    }).exec((err, result) => {
-      if (err) {
-        return res.status(400).json(err);
-      }
-      res.status(200).json(result);
-    });
   }
+
+  Product.findOneAndUpdate({ _id: data.id }, data, {
+    returnOriginal: false,
+  }).exec((err, result) => {
+    if (err) {
+      return res.status(400).json(err);
+    }
+    console.log(result);
+    res.status(200).json(result);
+  });
 };
 
 exports.deleteProduct = (req, res) => {
