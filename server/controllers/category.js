@@ -68,7 +68,9 @@ exports.updateCategory = (req, res) => {
     _id: req.body._id,
     name: req.body.name,
     description: req.body.description,
-    slug: req.body.slug,
+    slug: req.body.slug
+      ? slugify(req.body.slug, { replacement: '-', lower: true })
+      : slugify(req.body.name, { replacement: '-', lower: true }),
   };
 
   if (req.body.parentId !== req.body._id) {
