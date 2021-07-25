@@ -4,12 +4,14 @@ import Homepage from './pages/Homepage/index';
 import Products from './pages/Products/index';
 import Categories from './pages/Categories/index';
 import Login from './pages/Login/index';
+import Pages from './pages/Pages/index';
+import PageActions from './pages/Pages/PageActions/index';
+
 import { useDispatch } from 'react-redux';
 import { isLoggedIn } from './_actions/auth';
 import { getCategories } from './_actions/category';
 import { getProducts } from './_actions/product';
 import Privateroute from './components/HOF/Privateroute.js';
-import Cookies from 'js-cookie';
 import { CssBaseline } from '@material-ui/core';
 
 function App() {
@@ -27,6 +29,11 @@ function App() {
         <Privateroute exact path='/' component={Homepage} />
         <Privateroute path='/categories' component={Categories} />
         <Privateroute path='/products' component={Products} />
+        <Privateroute path='/pages/add' component={PageActions} />
+        <Privateroute path='/pages/edit/:id' component={PageActions} />
+
+        <Privateroute path='/pages' component={Pages} />
+
         <Route path='/login' component={Login} />
       </Switch>
     </>
