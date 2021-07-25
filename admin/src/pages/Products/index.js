@@ -11,6 +11,10 @@ import {
 } from '../../_actions/product';
 import { DataGrid } from '@material-ui/data-grid';
 import { GrDocumentImage } from 'react-icons/gr';
+import * as dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime';
+import currency from 'currency.js';
+dayjs.extend(relativeTime);
 
 function getModalStyle() {
   const top = 50;
@@ -78,6 +82,7 @@ export default function Products() {
     setOpen(false);
   };
 
+  console.log(productImgs.length > 0);
   const onSubmit = (e) => {
     e.preventDefault();
 
@@ -91,7 +96,6 @@ export default function Products() {
     form.append('price', productData.price);
     form.append('sku', productData.sku);
     form.append('quantity', productData.quantity);
-
     if (productImgs.length > 0) {
       productImgs.map((img) => form.append('productImgs', img));
     }
@@ -226,25 +230,28 @@ export default function Products() {
   ];
 
   const rows = (products) => {
-    return products.map((product, inx) => {
+    return products.map((product) => {
       return {
         id: product._id,
         image: `${product.productImg[0].img}`,
         name: product.name,
+        slug: product.slug,
         shortDescription: product.shortDescription,
         longDescription: product.longDescription,
-        price: product.price,
+        price: currency(product.price).format(),
         quantity: product.quantity,
         categoryId: product.categoryId,
         sku: product.sku,
+        date: dayjs(product.updatedAt).format('MM/DD/YY'),
         actions: 'actions',
       };
     });
   };
-  const initUpdate = (rows, id) => {
-    const result = rows.find((item) => item.id === id);
+  const initUpdate = (products, id) => {
+    const result = products.find((item) => item._id === id);
+    console.log(result);
     setProductData({
-      _id: result.id,
+      _id: result._id,
       name: result.name,
       slug: result.slug,
       shortDescription: result.shortDescription,
@@ -298,6 +305,11 @@ export default function Products() {
       headerName: 'QUANTITY',
       width: 150,
     },
+    {
+      field: 'date',
+      headerName: 'DATE',
+      width: 150,
+    },
 
     {
       field: 'actions',
@@ -312,7 +324,7 @@ export default function Products() {
                 e.preventDefault();
                 return (
                   setRequestUpdate(true),
-                  initUpdate(rows(products), params.id),
+                  initUpdate(products, params.id),
                   setOpen(true)
                 );
               }}
