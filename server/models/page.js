@@ -9,9 +9,9 @@ const pageSchema = new mongoose.Schema(
     },
     name: { type: String, required: true },
     slug: { type: String, required: true },
-    heroImage: { type: String, required: true },
-    heroImageLinkTo: { type: String, required: true },
-    content: { type: String, required: true },
+    content: { type: String },
+    heroImage: { type: String },
+    heroImageLinkTo: { type: String },
   },
   { timestamps: true }
 );
