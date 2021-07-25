@@ -50,7 +50,9 @@ exports.updateProduct = (req, res) => {
     owner: req.user._id,
     id: req.body._id,
     name: req.body.name,
-    slug: req.body.slug ? req.body.slug : req.body.name,
+    slug: req.body.slug
+      ? slugify(req.body.slug, { replacement: '-', lower: true })
+      : slugify(req.body.name, { replacement: '-', lower: true }),
     longDescription: req.body.longDescription,
     categoryId: req.body.categoryId,
     price: req.body.price,
