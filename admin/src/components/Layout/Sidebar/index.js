@@ -47,27 +47,32 @@ export default function Sidebar() {
     <>
       <Drawer
         className={classes.drawer}
-        variant="persistent"
-        anchor="left"
+        variant='persistent'
+        anchor='left'
         open={open}
         classes={{
           paper: classes.drawerPaper,
         }}
       >
         <List>
-          <Link to="/" className={classes.links}>
+          <Link to='/' className={classes.links}>
             <ListItem button>
-              <ListItemText primary="Home" />
+              <ListItemText primary='Home' />
             </ListItem>
           </Link>
-          <Link to="/categories" className={classes.links}>
+          <Link to='/categories' className={classes.links}>
             <ListItem button>
-              <ListItemText primary="Categories" />
+              <ListItemText primary='Categories' />
             </ListItem>
           </Link>
-          <Link to="/products" className={classes.links}>
+          <Link to='/products' className={classes.links}>
             <ListItem button>
-              <ListItemText primary="Products" />
+              <ListItemText primary='Products' />
+            </ListItem>
+          </Link>
+          <Link to='/pages' className={classes.links}>
+            <ListItem button>
+              <ListItemText primary='Pages' />
             </ListItem>
           </Link>
         </List>
