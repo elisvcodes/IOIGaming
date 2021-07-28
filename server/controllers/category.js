@@ -19,6 +19,7 @@ const displayCategory = (categories, parentId = null) => {
       slug: cat.slug,
       categoryImg: cat.categoryImg,
       parentId: cat.parentId,
+      isFeatured: cat.isFeatured,
       children: displayCategory(categories, cat._id),
     });
   }
@@ -30,6 +31,7 @@ exports.createCategory = (req, res) => {
     owner: req.user._id,
     name: req.body.name,
     description: req.body.description,
+    isFeatured: req.body.isFeatured,
     slug: req.body.slug
       ? slugify(req.body.slug, { replacement: '-', lower: true })
       : slugify(req.body.name, { replacement: '-', lower: true }),
@@ -68,6 +70,7 @@ exports.updateCategory = (req, res) => {
     _id: req.body._id,
     name: req.body.name,
     description: req.body.description,
+    isFeatured: req.body.isFeatured,
     slug: req.body.slug
       ? slugify(req.body.slug, { replacement: '-', lower: true })
       : slugify(req.body.name, { replacement: '-', lower: true }),
