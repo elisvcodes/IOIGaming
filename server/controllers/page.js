@@ -38,6 +38,15 @@ exports.getPages = (req, res) => {
   });
 };
 
+exports.getPage = (req, res) => {
+  Page.findOne({ slug: req.params.slug }).exec((err, result) => {
+    if (err) {
+      return res.status(400).json({ msg: err });
+    }
+    res.status(200).json(result);
+  });
+};
+
 exports.updatePage = (req, res) => {
   const data = {
     _id: req.body._id,
@@ -56,7 +65,6 @@ exports.updatePage = (req, res) => {
     data.heroImage = req.file.filename;
   }
 
-  console.log(data);
   Page.findOneAndUpdate({ _id: data._id }, data, {
     returnOriginal: false,
   }).exec((err, result) => {
