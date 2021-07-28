@@ -13,6 +13,7 @@ exports.createProduct = (req, res) => {
     price: req.body.price,
     sku: req.body.sku,
     quantity: req.body.quantity,
+    isFeatured: req.body.isFeatured,
   };
 
   if (req.body.shortDescription) {
@@ -58,6 +59,7 @@ exports.updateProduct = (req, res) => {
     price: req.body.price,
     sku: req.body.sku,
     quantity: req.body.quantity,
+    isFeatured: req.body.isFeatured,
   };
 
   if (req.body.shortDescription) {

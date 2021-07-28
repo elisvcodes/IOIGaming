@@ -8,6 +8,7 @@ const categorySchema = new mongoose.Schema(
     slug: { type: String, required: true, unique: true },
     parentId: { type: String },
     categoryImg: { type: String },
+    isFeatured: { type: Number, default: 2 },
   },
   { timestamps: true }
 );
