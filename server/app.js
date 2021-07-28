@@ -7,7 +7,12 @@ const app = express();
 require('./db/db');
 
 // required Middlewares
-app.use(cors({ credentials: true, origin: 'http://localhost:3000' }));
+app.use(
+  cors({
+    credentials: true,
+    origin: ['http://localhost:3000', 'http://localhost:3001'],
+  })
+);
 app.use(express.json());
 app.use(cookieParser());
 app.use('/public', express.static(path.join(__dirname, 'public')));
