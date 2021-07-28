@@ -8,6 +8,7 @@ const {
   getPages,
   updatePage,
   deletePage,
+  getPage,
 } = require('../controllers/page');
 
 let storage = multer.diskStorage({
@@ -23,6 +24,7 @@ let upload = multer({ storage: storage });
 
 router.post('/create', protected, upload.single('heroImage'), createPage);
 router.get('/', getPages);
+router.get('/:slug', getPage);
 router.patch('/update', protected, upload.single('heroImage'), updatePage);
 router.delete('/:id', protected, deletePage);
 module.exports = router;
