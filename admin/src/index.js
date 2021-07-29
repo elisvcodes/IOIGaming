@@ -5,14 +5,14 @@ import { BrowserRouter } from 'react-router-dom';
 
 import { Provider } from 'react-redux';
 import { createStore, compose, applyMiddleware } from 'redux';
-import Thunk from 'redux-thunk';
+import thunk from 'redux-thunk';
 
 import reducer from './_reducers/index';
 
 const store = createStore(
   reducer,
   compose(
-    applyMiddleware(Thunk),
+    applyMiddleware(thunk),
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
   )
 );
