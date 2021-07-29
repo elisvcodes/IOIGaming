@@ -17,25 +17,26 @@ export default function Form(props) {
   return (
     <>
       <form onSubmit={props.onSubmit} className={classes.root}>
-        {props.fields.map((field, index) => (
-          <Inputs
-            key={index}
-            type={field.type}
-            name={field.name}
-            label={field.label}
-            variant={field.variant}
-            className={field.className}
-            value={field.value}
-            onChange={field.onChange}
-            fullWidth={field.fullWidth}
-            required={field.required}
-            multiline={field.multiline}
-            rows={field.rows}
-            width={field.width}
-            select={field.select}
-          />
-        ))}
-        <Button type="submit" variant="contained">
+        {props.fields &&
+          props.fields.map((field, index) => (
+            <Inputs
+              key={index}
+              type={field.type}
+              name={field.name}
+              label={field.label}
+              variant={field.variant}
+              // className={field.className}
+              value={field.value}
+              onChange={field.onChange}
+              fullWidth={field.fullWidth}
+              required={field.required}
+              multiline={field.multiline}
+              rows={field.rows}
+              width={field.width}
+              select={field.select}
+            />
+          ))}
+        <Button type='submit' variant='contained'>
           Submit
         </Button>
       </form>
