@@ -4,7 +4,7 @@ import Layout from '../../components/Layout/index';
 export default function Homepage() {
   return (
     <>
-      <Layout>
+      <Layout sidebar>
         <h1>Homepage</h1>
       </Layout>
     </>
