@@ -62,6 +62,7 @@ export default function Products() {
     price: '',
     sku: '',
     quantity: '',
+    isFeatured: 2,
   });
 
   const onChange = (e) => {
@@ -79,10 +80,23 @@ export default function Products() {
     setOpen(true);
   };
   const handleClose = () => {
-    setOpen(false);
+    setTimeout(() => {
+      setOpen(false);
+      setProductData({
+        _id: '',
+        name: '',
+        slug: '',
+        shortDescription: '',
+        longDescription: '',
+        categoryId: '',
+        price: '',
+        sku: '',
+        quantity: '',
+        isFeatured: false,
+      });
+    }, 100);
   };
 
-  console.log(productImgs.length > 0);
   const onSubmit = (e) => {
     e.preventDefault();
 
@@ -96,6 +110,7 @@ export default function Products() {
     form.append('price', productData.price);
     form.append('sku', productData.sku);
     form.append('quantity', productData.quantity);
+    form.append('isFeatured', productData.isFeatured);
     if (productImgs.length > 0) {
       productImgs.map((img) => form.append('productImgs', img));
     }
@@ -106,21 +121,7 @@ export default function Products() {
     } else {
       dispatch(createProduct(form));
     }
-
-    setTimeout(() => {
-      setOpen(false);
-      setProductData({
-        _id: '',
-        name: '',
-        slug: '',
-        shortDescription: '',
-        longDescription: '',
-        categoryId: '',
-        price: '',
-        sku: '',
-        quantity: '',
-      });
-    }, 100);
+    handleClose();
   };
 
   const flattenCategories = (categories, options = []) => {
@@ -142,7 +143,7 @@ export default function Products() {
       name: 'name',
       label: 'name',
       variant: 'outlined',
-      className: classes.input,
+      // className: classes.input,
       value: productData.name,
       required: true,
       width: true,
@@ -185,10 +186,22 @@ export default function Products() {
       label: 'categoryId',
       variant: 'outlined',
       value: productData.categoryId,
-      fullWidth: true,
       required: true,
-      onChange,
+      width: true,
       select: flattenCategories(categories),
+      onChange,
+    },
+    {
+      name: 'isFeatured',
+      label: 'Featured?',
+      variant: 'outlined',
+      value: productData.isFeatured,
+      width: true,
+      select: [
+        { value: 1, name: 'Yes' },
+        { value: 2, name: 'No' },
+      ],
+      onChange,
     },
     {
       type: 'number',
@@ -242,6 +255,7 @@ export default function Products() {
         quantity: product.quantity,
         categoryId: product.categoryId,
         sku: product.sku,
+        isFeatured: product.isFeatured,
         date: dayjs(product.updatedAt).format('MM/DD/YY'),
         actions: 'actions',
       };
@@ -260,6 +274,7 @@ export default function Products() {
       price: result.price,
       sku: result.sku,
       quantity: result.quantity,
+      isFeatured: result.isFeatured,
     });
   };
 

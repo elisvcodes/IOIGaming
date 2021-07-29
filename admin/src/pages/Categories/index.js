@@ -32,6 +32,7 @@ export default function Categories() {
     description: '',
     parentId: '',
     slug: '',
+    isFeatured: 2,
   });
 
   const [requestUpdate, setRequestUpdate] = useState(false);
@@ -58,6 +59,7 @@ export default function Categories() {
     form.append('slug', catData.slug);
     form.append('parentId', catData.parentId);
     form.append('categoryImg', catImg);
+    form.append('isFeatured', catData.isFeatured);
 
     if (requestUpdate) {
       dispatch(updateCategory(form));
@@ -66,7 +68,14 @@ export default function Categories() {
       dispatch(createCategory(form));
     }
 
-    setCatData({ _id: '', name: '', description: '', parentId: '', slug: '' });
+    setCatData({
+      _id: '',
+      name: '',
+      description: '',
+      parentId: '',
+      slug: '',
+      isFeatured: 2,
+    });
   };
 
   const flattenCategories = (categories, options = []) => {
@@ -84,12 +93,14 @@ export default function Categories() {
 
   const rows = (categories, options = []) => {
     for (const cat of categories) {
+      console.log(cat);
       options.push({
         id: cat._id,
         image: `${cat.categoryImg}`,
         name: cat.name,
         description: cat.description,
         slug: cat.slug,
+        isFeatured: cat.isFeatured,
         actions: 'Operations',
       });
       if (cat.children) {
@@ -101,12 +112,14 @@ export default function Categories() {
 
   const initUpdate = (rows, id) => {
     const result = rows.find((item) => item.id === id);
+    console.log(result);
     setCatData({
       _id: result.id,
       name: result.name,
       description: result.description,
       parentId: result.id,
       slug: result.slug,
+      isFeatured: result.isFeatured,
     });
   };
   const columns = [
@@ -217,6 +230,18 @@ export default function Categories() {
       onChange,
       value: catData.parentId,
       select: flattenCategories(categories),
+    },
+    {
+      name: 'isFeatured',
+      label: 'Featured?',
+      variant: 'outlined',
+      value: catData.isFeatured,
+      fullWidth: true,
+      select: [
+        { value: 1, name: 'Yes' },
+        { value: 2, name: 'No' },
+      ],
+      onChange,
     },
     {
       type: 'file',
