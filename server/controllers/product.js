@@ -1,5 +1,6 @@
 const Product = require('../models/product');
 const slugify = require('slugify');
+const mongoose = require('mongoose');
 
 exports.createProduct = (req, res) => {
   const data = {
@@ -9,7 +10,13 @@ exports.createProduct = (req, res) => {
       ? slugify(req.body.slug, { replacement: '-', lower: true })
       : slugify(req.body.name, { replacement: '-', lower: true }),
     longDescription: req.body.longDescription,
-    categoryId: req.body.categoryId,
+    categoryId: Array.isArray(req.body.categoryId)
+      ? req.body.categoryId.map((id) => {
+          return {
+            id: mongoose.Types.ObjectId(id),
+          };
+        })
+      : { id: mongoose.Types.ObjectId(req.body.categoryId) },
     price: req.body.price,
     sku: req.body.sku,
     quantity: req.body.quantity,
@@ -46,6 +53,15 @@ exports.getProducts = (req, res) => {
   });
 };
 
+exports.getSingleProduct = (req, res) => {
+  Product.findOne({ slug: req.params.slug }).exec((err, result) => {
+    if (err) {
+      return res.status(400).json(err);
+    }
+    res.status(200).json(result);
+  });
+};
+
 exports.updateProduct = (req, res) => {
   const data = {
     owner: req.user._id,
@@ -55,7 +71,14 @@ exports.updateProduct = (req, res) => {
       ? slugify(req.body.slug, { replacement: '-', lower: true })
       : slugify(req.body.name, { replacement: '-', lower: true }),
     longDescription: req.body.longDescription,
-    categoryId: req.body.categoryId,
+    categoryId: Array.isArray(req.body.categoryId)
+      ? req.body.categoryId.map((id) => {
+          return {
+            id: mongoose.Types.ObjectId(id),
+          };
+        })
+      : { id: mongoose.Types.ObjectId(req.body.categoryId) },
+
     price: req.body.price,
     sku: req.body.sku,
     quantity: req.body.quantity,
