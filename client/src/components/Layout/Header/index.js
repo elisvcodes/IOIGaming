@@ -7,8 +7,11 @@ import {
   Link,
 } from '@material-ui/core';
 import React from 'react';
-
+import { useSelector } from 'react-redux';
+import { AiOutlineShoppingCart } from 'react-icons/ai';
+import './style.css';
 export default function Header() {
+  const cart = useSelector((state) => state.cart);
   return (
     <>
       <AppBar position='relative' elevation={0}>
@@ -21,8 +24,7 @@ export default function Header() {
           >
             <Typography>
               <Link href='/' color='inherit' underline='none'>
-                {' '}
-                ZebraShop
+                IoI
               </Link>
             </Typography>
             <InputBase
@@ -35,7 +37,14 @@ export default function Header() {
                 background: 'white',
               }}
             />
-            <Typography>Cart</Typography>
+            <Typography>
+              <div className='cartIcon'>
+                <Link href='/cart' color='inherit'>
+                  <span className='cartItems'>{cart.length}</span>
+                  <AiOutlineShoppingCart size={25} />
+                </Link>
+              </div>
+            </Typography>
           </Toolbar>
         </Container>
       </AppBar>
