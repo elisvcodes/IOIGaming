@@ -9,6 +9,7 @@ import {
   CardMedia,
   CardContent,
   Typography,
+  Link,
 } from '@material-ui/core';
 import './styles.css';
 
@@ -35,7 +36,6 @@ export default function Homepage() {
     return options;
   };
   const itrCategories = flattenArray(categories);
-  console.log(itrCategories);
 
   return (
     <Layout>
@@ -49,20 +49,22 @@ export default function Homepage() {
         <div>
           <h2>Featured Catgeories</h2>
           <Grid container>
-            {itrCategories.map((item) => {
+            {itrCategories.map((item, idx) => {
               return item.isFeatured === 1 ? (
-                <Grid item xs={6} sm={4}>
-                  <Card style={{ margin: '5px 5px' }} elevation={0}>
-                    <CardMedia
-                      component='img'
-                      alt={item.name}
-                      image={`http://localhost:7000/public/media/categories/${item.categoryImg}`}
-                      height={140}
-                    />
-                    <CardContent>
-                      <Typography variant='body2'>{item.name} </Typography>
-                    </CardContent>
-                  </Card>
+                <Grid item xs={6} sm={3} key={idx}>
+                  <div className='categoriesCard'>
+                    <Link
+                      href={`/cat/${item.slug}`}
+                      underline='none'
+                      color='textPrimary'
+                    >
+                      <img
+                        src={`http://localhost:7000/public/media/categories/${item.categoryImg}`}
+                        alt={item.name}
+                      />
+                      <p>{item.name}</p>
+                    </Link>
+                  </div>
                 </Grid>
               ) : null;
             })}
