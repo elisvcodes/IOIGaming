@@ -1,4 +1,7 @@
 const Category = require('../models/category');
+const Product = require('../models/product');
+const mongoose = require('mongoose');
+
 const slugify = require('slugify');
 
 const displayCategory = (categories, parentId = null) => {
@@ -62,6 +65,25 @@ exports.getCategories = (req, res) => {
     }
     const list = displayCategory(result);
     res.status(200).json(list);
+  });
+};
+
+exports.getProductsByCat = (req, res) => {
+  Category.findOne({ slug: req.params.slug }).exec((err, result) => {
+    if (err) {
+      return res.status(400).json({ msg: err });
+    }
+
+    if (result !== null) {
+      Product.find({
+        'categoryId.id': mongoose.Types.ObjectId(result._id),
+      }).exec((err, products) => {
+        if (err) {
+          return res.status(400).json({ msg: err });
+        }
+        res.status(200).json(products);
+      });
+    }
   });
 };
 
