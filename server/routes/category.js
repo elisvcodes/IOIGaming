@@ -5,6 +5,7 @@ const router = express.Router();
 const {
   createCategory,
   getCategories,
+  getProductsByCat,
   deleteCategory,
   updateCategory,
 } = require('../controllers/category');
@@ -23,6 +24,8 @@ let upload = multer({ storage: storage });
 
 router.post('/create', protected, upload.single('categoryImg'), createCategory);
 router.get('/', getCategories);
+router.get('/:slug', getProductsByCat);
+
 router.patch(
   '/update',
   protected,
