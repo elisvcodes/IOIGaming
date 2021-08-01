@@ -1,0 +1,30 @@
+.productsCard {
+  width: 155px;
+  height: 155px;
+  margin: 70px 0;
+}
+
+.productsCard img {
+  object-fit: contain;
+  width: 100%;
+  height: 100%;
+}
+
+.productTitle {
+  font-weight: bold;
+  font-size: 14px;
+}
+
+@media only screen and (min-width: 728px) {
+  .productsCard {
+    width: 275px;
+    height: 275px;
+  }
+  .productTitle {
+    font-size: 15px;
+  }
+  .productPrice {
+    font-weight: bold;
+    font-size: 14px;
+  }
+}

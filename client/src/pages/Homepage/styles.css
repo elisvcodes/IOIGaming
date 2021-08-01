@@ -7,3 +7,30 @@
   width: 100%;
   height: 400px;
 }
+
+.categoriesCard {
+  width: 155px;
+  height: 155px;
+  margin: 35px 0;
+}
+
+.categoriesCard img {
+  object-fit: contain;
+  width: 100%;
+  height: 100%;
+}
+
+.categoriesCard p {
+  font-weight: bold;
+  font-size: 14px;
+}
+
+@media only screen and (min-width: 728px) {
+  .categoriesCard {
+    width: 275px;
+    height: 275px;
+  }
+  .categoriesCard p {
+    font-size: 17px;
+  }
+}

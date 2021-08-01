@@ -1,0 +1,13 @@
+.cartIcon {
+  position: relative;
+  display: inline-block;
+  padding-top: 17px;
+  margin-left: 10px;
+}
+.cartItems {
+  position: absolute;
+  display: inline-block;
+  padding-top: 15px;
+  top: -15px;
+  right: 5px;
+}
