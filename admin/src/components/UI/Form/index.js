@@ -34,6 +34,7 @@ export default function Form(props) {
               rows={field.rows}
               width={field.width}
               select={field.select}
+              SelectProps={field.SelectProps}
             />
           ))}
         <Button type='submit' variant='contained'>

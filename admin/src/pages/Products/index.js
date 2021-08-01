@@ -58,13 +58,14 @@ export default function Products() {
     slug: '',
     shortDescription: '',
     longDescription: '',
-    categoryId: '',
     price: '',
     sku: '',
     quantity: '',
     isFeatured: 2,
   });
 
+  const [productCategories, setProductCategories] = useState([]);
+  console.log(productCategories);
   const onChange = (e) => {
     const { name, value } = e.target;
     setProductData({ ...productData, [name]: value });
@@ -74,6 +75,10 @@ export default function Products() {
 
   const onChangeImages = (e) => {
     setProductImgs([...productImgs, e.target.files[0]]);
+  };
+
+  const onChangeSelect = (event) => {
+    setProductCategories(event.target.value);
   };
 
   const handleOpen = () => {
@@ -88,12 +93,12 @@ export default function Products() {
         slug: '',
         shortDescription: '',
         longDescription: '',
-        categoryId: '',
         price: '',
         sku: '',
         quantity: '',
         isFeatured: false,
       });
+      setProductCategories([]);
     }, 100);
   };
 
@@ -106,7 +111,8 @@ export default function Products() {
     form.append('slug', productData.slug);
     form.append('shortDescription', productData.shortDescription);
     form.append('longDescription', productData.longDescription);
-    form.append('categoryId', productData.categoryId);
+    productCategories.map((id) => form.append('categoryId', id));
+    // form.append('categoryId', productCategories);
     form.append('price', productData.price);
     form.append('sku', productData.sku);
     form.append('quantity', productData.quantity);
@@ -185,11 +191,12 @@ export default function Products() {
       name: 'categoryId',
       label: 'categoryId',
       variant: 'outlined',
-      value: productData.categoryId,
+      value: productCategories,
       required: true,
       width: true,
       select: flattenCategories(categories),
-      onChange,
+      onChange: onChangeSelect,
+      SelectProps: { multiple: true },
     },
     {
       name: 'isFeatured',
@@ -253,7 +260,7 @@ export default function Products() {
         longDescription: product.longDescription,
         price: currency(product.price).format(),
         quantity: product.quantity,
-        categoryId: product.categoryId,
+        // categoryId: product.categoryId,
         sku: product.sku,
         isFeatured: product.isFeatured,
         date: dayjs(product.updatedAt).format('MM/DD/YY'),
@@ -263,19 +270,18 @@ export default function Products() {
   };
   const initUpdate = (products, id) => {
     const result = products.find((item) => item._id === id);
-    console.log(result);
     setProductData({
       _id: result._id,
       name: result.name,
       slug: result.slug,
       shortDescription: result.shortDescription,
       longDescription: result.longDescription,
-      categoryId: result.categoryId,
       price: result.price,
       sku: result.sku,
       quantity: result.quantity,
       isFeatured: result.isFeatured,
     });
+    setProductCategories(result.categoryId.map((id) => id.id));
   };
 
   const columns = [

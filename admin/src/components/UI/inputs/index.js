@@ -21,9 +21,10 @@ export default function Inputs({
   rows,
   width,
   select,
+  SelectProps,
 }) {
   const classes = useStyles();
-
+  console.log(SelectProps);
   return (
     <>
       <TextField
@@ -39,6 +40,7 @@ export default function Inputs({
         multiline={multiline}
         rows={rows}
         select={select}
+        SelectProps={SelectProps}
       >
         {select &&
           select.map((option) => (
