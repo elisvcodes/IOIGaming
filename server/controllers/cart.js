@@ -1,4 +1,16 @@
 const Cart = require('../models/cart');
+const Product = require('../models/product');
+
+exports.getCartItems = (req, res) => {
+  Product.find({ _id: { $in: req.body.cartItemIds } })
+    .select('name price slug productImg ')
+    .exec((err, result) => {
+      if (err) {
+        return res.status(400).json(err);
+      }
+      res.status(200).json(result);
+    });
+};
 
 exports.addToCart = (req, res) => {
   const data = {
