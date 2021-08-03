@@ -1,27 +1,48 @@
 let cartStorage = localStorage.getItem('cart')
   ? JSON.parse(localStorage.getItem('cart'))
-  : [];
+  : { owner: null, items: [] };
 export default (cart = cartStorage, action) => {
   switch (action.type) {
     case 'GET_CART':
       return cart;
     case 'ADD_TO_CART':
-      if (cart.length > 0) {
-        console.log(action.payload.items);
-        const itemInCart = cart.find((cartItems) =>
-          cartItems.items.find(
-            (items) => items.item === action.payload.items[0].item
-          )
+      if (cart.items.length > 0) {
+        const itemInCart = cart.items.find(
+          (cartItems) => cartItems.item == action.payload.item
         );
+
         if (!itemInCart) {
-          cart.push(action.payload);
+          cart.items.push(action.payload);
           localStorage.setItem('cart', JSON.stringify(cart));
         }
       } else {
-        cart.push(action.payload);
+        cart.items.push(action.payload);
         localStorage.setItem('cart', JSON.stringify(cart));
       }
-      return [...cart];
+      return { ...cart };
+
+    case 'INCREMENT':
+      cart.items = cart.items.map((item) =>
+        item.item === action.payload.item ? action.payload : item
+      );
+      localStorage.setItem('cart', JSON.stringify(cart));
+
+      return { ...cart };
+
+    case 'DECREMENT':
+      console.log(action.payload);
+      if (action.payload.quantity < 1) {
+        cart.items = cart.items.filter(
+          (item) => item.item !== action.payload.item
+        );
+      } else {
+        cart.items = cart.items.map((item) =>
+          item.item === action.payload.item ? action.payload : item
+        );
+      }
+      localStorage.setItem('cart', JSON.stringify(cart));
+
+      return { ...cart };
 
     default:
       return cart;
