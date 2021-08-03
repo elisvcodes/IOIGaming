@@ -60,8 +60,8 @@ export default function Product(props) {
                   onClick={() =>
                     dispatch(
                       addToCart({
-                        owner: null,
-                        items: [{ item: productData._id, quantity: 1 }],
+                        item: productData._id,
+                        quantity: 1,
                       })
                     )
                   }
