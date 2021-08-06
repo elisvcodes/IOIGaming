@@ -18,7 +18,6 @@ export default function Product(props) {
     setProductData(data);
   }, []);
 
-  console.log(productData);
   return (
     <>
       <Layout>
@@ -62,6 +61,7 @@ export default function Product(props) {
                       addToCart({
                         item: productData._id,
                         quantity: 1,
+                        total: productData.price,
                       })
                     )
                   }
