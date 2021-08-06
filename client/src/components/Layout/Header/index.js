@@ -12,7 +12,6 @@ import { AiOutlineShoppingCart } from 'react-icons/ai';
 import './style.css';
 export default function Header() {
   const cart = useSelector((state) => state.cart);
-  console.log(cart);
   const totalCartItems = cart.items;
   return (
     <>
@@ -42,7 +41,9 @@ export default function Header() {
             <Typography component={'span'}>
               <div className='cartIcon'>
                 <Link href='/cart' color='inherit'>
-                  <span className='cartItems'>{totalCartItems.length} </span>
+                  <span className='cartItems'>
+                    {cart.items.reduce((acc, cur) => acc + cur.quantity, 0)}{' '}
+                  </span>
                   <AiOutlineShoppingCart size={25} />
                 </Link>
               </div>
