@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import Layout from '../../components/Layout/index';
-import { Grid, Container, Card, Typography } from '@material-ui/core';
+import { Grid, Container, Card, Typography, Button } from '@material-ui/core';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
 import CartItem from './CartItem';
 export default function Cart() {
   const cart = useSelector((state) => state.cart);
-  console.log(cart);
   const [cartItems, setCartItems] = useState();
+  const [cartTotal, setCartTotal] = useState(0);
   useEffect(async () => {
     const cartItemIds = cart.items.map((cart) => cart.item);
     const { data } = await axios.post(
@@ -15,19 +15,24 @@ export default function Cart() {
       { cartItemIds }
     );
     setCartItems(data);
-    console.log(data);
+    setCartTotal(cart.items.reduce((acc, cur) => acc + cur.total, 0));
   }, []);
+
   return (
     <>
       <Layout>
         <Container>
           <Grid container>
-            <Grid item sm={12} md={8}>
+            <Grid item xs={12} md={8}>
               {cartItems && cartItems.length > 0 ? (
-                cartItems.map((item) => {
+                cartItems.map((item, idx) => {
                   return (
                     <>
-                      <CartItem item={item} key={item._id} />
+                      <CartItem
+                        item={item}
+                        key={idx}
+                        setCartTotal={setCartTotal}
+                      />
                     </>
                   );
                 })
@@ -48,19 +53,70 @@ export default function Cart() {
                 </Card>
               )}
             </Grid>
-            <Grid item sm={12} md={4}>
+            <Grid item xs={12} md={4}>
               <Card
                 style={{
                   marginTop: '20px',
                   display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'center',
+                  // justifyContent: 'center',
                   flexDirection: 'column',
-                  padding: '10px 0',
+                  padding: '10px',
+                  height: '230px',
+                  width: '100%',
                 }}
               >
-                <Typography variant='body1'>Order Summary</Typography>
-                <Typography variant='body1'>Order Summary</Typography>
+                <Typography variant='h6' align='center'>
+                  Order Summary
+                </Typography>
+                <div style={{ margin: '10px 0' }}>
+                  <div
+                    style={{
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      margin: '5px 0',
+                    }}
+                  >
+                    <Typography variant='body2'>Subtotal </Typography>
+                    <Typography variant='body2'>
+                      ${cartTotal.toFixed(2)}{' '}
+                    </Typography>
+                  </div>
+                  <div
+                    style={{
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      margin: '5px 0',
+                    }}
+                  >
+                    <Typography variant='body2'>Shipping & Handling</Typography>
+                    <Typography variant='body2'>FREE </Typography>
+                  </div>
+                  <div
+                    style={{
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      margin: '5px 0',
+                    }}
+                  >
+                    <Typography variant='body2'>Estimated Tax </Typography>
+                    <Typography variant='body2'>$0 </Typography>
+                  </div>
+                  <div
+                    style={{
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      margin: '5px 0',
+                    }}
+                  >
+                    <Typography variant='body2'>Estimated Total </Typography>
+                    <Typography variant='body2'>
+                      ${cartTotal.toFixed(2)}{' '}
+                    </Typography>
+                  </div>
+                </div>
+                <Button variant='contained' color='primary'>
+                  Checkout
+                </Button>
               </Card>
             </Grid>
           </Grid>
