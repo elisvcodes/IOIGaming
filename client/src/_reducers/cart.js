@@ -30,7 +30,6 @@ export default (cart = cartStorage, action) => {
       return { ...cart };
 
     case 'DECREMENT':
-      console.log(action.payload);
       if (action.payload.quantity < 1) {
         cart.items = cart.items.filter(
           (item) => item.item !== action.payload.item
