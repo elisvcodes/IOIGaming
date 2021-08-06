@@ -3,8 +3,9 @@ import { Card, CardContent, Typography, IconButton } from '@material-ui/core';
 import { IoAddSharp, IoRemoveSharp } from 'react-icons/io5';
 import { incrementItem, decrementItem } from '../../../_actions/cart';
 import { useDispatch, useSelector } from 'react-redux';
-export default function CartItem({ item }) {
+export default function CartItem({ item, setCartTotal }) {
   const cart = useSelector((state) => state.cart);
+
   const cartItem = cart.items.find((cartItem) => cartItem.item === item._id)
     ? cart.items.find((cartItem) => cartItem.item === item._id)
     : 0;
@@ -12,7 +13,6 @@ export default function CartItem({ item }) {
     cartItem.quantity ? cartItem.quantity : cartItem
   );
   const dispatch = useDispatch();
-
   return quantity < 1 ? (
     ''
   ) : (
@@ -52,7 +52,16 @@ export default function CartItem({ item }) {
             onClick={() => {
               return (
                 setQuantity(quantity + 1),
-                dispatch(incrementItem(item._id, quantity + 1))
+                dispatch(
+                  incrementItem(
+                    item._id,
+                    quantity + 1,
+                    item.price * (quantity + 1)
+                  )
+                ),
+                setCartTotal(
+                  cart.items.reduce((acc, cur) => acc + cur.total, 0)
+                )
               );
             }}
           >
@@ -63,7 +72,16 @@ export default function CartItem({ item }) {
             onClick={() => {
               return (
                 setQuantity(quantity - 1),
-                dispatch(decrementItem(item._id, quantity - 1))
+                dispatch(
+                  decrementItem(
+                    item._id,
+                    quantity - 1,
+                    item.price * (quantity - 1)
+                  )
+                ),
+                setCartTotal(
+                  cart.items.reduce((acc, cur) => acc + cur.total, 0)
+                )
               );
             }}
           >
