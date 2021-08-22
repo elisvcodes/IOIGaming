@@ -16,9 +16,7 @@ const productSchema = new mongoose.Schema(
     isFeatured: { type: Number, default: 2 },
 
     productImg: [
-      {
-        img: String,
-      },
+      { imageName: String, imageUrl: String, imageId: String }
     ],
   },
   { timestamps: true }
