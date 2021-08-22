@@ -10,7 +10,9 @@ const pageSchema = new mongoose.Schema(
     name: { type: String, required: true },
     slug: { type: String, required: true },
     content: { type: String },
-    heroImage: { type: String },
+    heroImage: [
+      { imageName: String, imageUrl: String, imageId: String }
+    ],
     heroImageLinkTo: { type: String },
   },
   { timestamps: true }
