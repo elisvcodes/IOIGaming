@@ -1,12 +1,9 @@
 import React, { useState } from 'react';
 
-import { Grid, Modal, makeStyles, Avatar, Button } from '@material-ui/core';
+import {  makeStyles, Avatar } from '@material-ui/core';
 import Layout from '../../components/Layout/index';
-import Form from '../../components/UI/Form';
 import { useSelector, useDispatch } from 'react-redux';
 import {
-  createProduct,
-  updateProduct,
   deleteProduct,
 } from '../../_actions/product';
 import { DataGrid } from '@material-ui/data-grid';
@@ -14,6 +11,7 @@ import { GrDocumentImage } from 'react-icons/gr';
 import * as dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import currency from 'currency.js';
+import { Link, useHistory } from 'react-router-dom';
 dayjs.extend(relativeTime);
 
 function getModalStyle() {
@@ -48,6 +46,7 @@ export default function Products() {
   const products = useSelector((state) => state.products);
 
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const [open, setOpen] = useState(false);
   const [requestUpdate, setRequestUpdate] = useState(false);
@@ -81,26 +80,26 @@ export default function Products() {
     setProductCategories(event.target.value);
   };
 
-  const handleOpen = () => {
-    setOpen(true);
-  };
-  const handleClose = () => {
-    setTimeout(() => {
-      setOpen(false);
-      setProductData({
-        _id: '',
-        name: '',
-        slug: '',
-        shortDescription: '',
-        longDescription: '',
-        price: '',
-        sku: '',
-        quantity: '',
-        isFeatured: false,
-      });
-      setProductCategories([]);
-    }, 100);
-  };
+  // const handleOpen = () => {
+  //   setOpen(true);
+  // };
+  // const handleClose = () => {
+  //   setTimeout(() => {
+  //     setOpen(false);
+  //     setProductData({
+  //       _id: '',
+  //       name: '',
+  //       slug: '',
+  //       shortDescription: '',
+  //       longDescription: '',
+  //       price: '',
+  //       sku: '',
+  //       quantity: '',
+  //       isFeatured: false,
+  //     });
+  //     setProductCategories([]);
+  //   }, 100);
+  // };
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -121,13 +120,13 @@ export default function Products() {
       productImgs.map((img) => form.append('productImgs', img));
     }
 
-    if (requestUpdate) {
-      dispatch(updateProduct(form));
-      setRequestUpdate(false);
-    } else {
-      dispatch(createProduct(form));
-    }
-    handleClose();
+    // if (requestUpdate) {
+    //   dispatch(updateProduct(form));
+    //   setRequestUpdate(false);
+    // } else {
+    //   dispatch(createProduct(form));
+    // }
+    // handleClose();
   };
 
   const flattenCategories = (categories, options = []) => {
@@ -251,9 +250,12 @@ export default function Products() {
 
   const rows = (products) => {
     return products.map((product) => {
+      console.log(product)
       return {
         id: product._id,
-        image: `${product.productImg[0].img}`,
+        image: product.productImg.length > 0 ? `${product.productImg[0].imageUrl}` : '',
+        // image: `${product.productImg[0].img}`,
+        // product.productImg.length > 0 ?  `${product.productImg[0].imageUrl}` : ''  ,
         name: product.name,
         slug: product.slug,
         shortDescription: product.shortDescription,
@@ -294,7 +296,7 @@ export default function Products() {
           <GrDocumentImage size={30} style={{ marginRight: 'auto' }} />
         ) : (
           <Avatar
-            src={` http://localhost:7000/public/media/products/${params.value}`}
+            src={` ${params.value}`}
             variant='square'
             style={{ height: '50px', width: '50px', marginRight: 'auto' }}
           />
@@ -340,14 +342,13 @@ export default function Products() {
         return (
           <div className={classes.actions}>
             <a
-              href='#'
+              href={`products/edit/${params.id}`}
               onClick={(e) => {
                 e.preventDefault();
-                return (
-                  setRequestUpdate(true),
-                  initUpdate(products, params.id),
-                  setOpen(true)
-                );
+                return history.push({
+                  pathname: `/products/edit/${params.id}`,
+                  state: products.find((product) => product._id === params.id),
+                });
               }}
             >
               Edit
@@ -372,8 +373,8 @@ export default function Products() {
       <Layout sidebar>
         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
           <h3>Products</h3>
+          <Link to="/products/add">
           <button
-            onClick={handleOpen}
             style={{
               padding: '1px 20px',
               margin: '15px',
@@ -382,7 +383,9 @@ export default function Products() {
           >
             Add
           </button>
-          <Modal
+          </Link>
+
+          {/* <Modal
             open={open}
             onClose={handleClose}
             aria-labelledby='product-model'
@@ -395,7 +398,7 @@ export default function Products() {
               ))}
               <Form onSubmit={onSubmit} fields={inputFields} />
             </div>
-          </Modal>
+          </Modal> */}
         </div>
         <div>
           <DataGrid
