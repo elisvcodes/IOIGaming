@@ -36,6 +36,7 @@ export default function Categories() {
   });
 
   const [requestUpdate, setRequestUpdate] = useState(false);
+
   const [catImg, setCatImg] = useState('');
   const dispatch = useDispatch();
   const categories = useSelector((state) => state.categories);
@@ -93,10 +94,10 @@ export default function Categories() {
 
   const rows = (categories, options = []) => {
     for (const cat of categories) {
-      console.log(cat);
+      console.log(cat.categoryImg.length > 0)
       options.push({
         id: cat._id,
-        image: `${cat.categoryImg}`,
+        image: cat.categoryImg.length > 0 ?  `${cat.categoryImg[0].imageUrl}` : ''  ,
         name: cat.name,
         description: cat.description,
         slug: cat.slug,
@@ -131,8 +132,9 @@ export default function Categories() {
         return params.value === 'undefined' ? (
           <GrDocumentImage size={30} style={{ marginRight: 'auto' }} />
         ) : (
+          console.log(params),
           <Avatar
-            src={` http://localhost:7000/public/media/categories/${params.value}`}
+            src={` ${params.value}`}
             variant='square'
             style={{
               height: '50px',
