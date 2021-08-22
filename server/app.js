@@ -3,6 +3,7 @@ const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const path = require('path');
 const app = express();
+require('dotenv').config()
 
 require('./db/db');
 
