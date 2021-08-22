@@ -1,6 +1,7 @@
 const Category = require('../models/category');
 const Product = require('../models/product');
 const mongoose = require('mongoose');
+const cloud = require('../middleware/cloudinaryConfig');
 
 const slugify = require('slugify');
 
@@ -29,7 +30,7 @@ const displayCategory = (categories, parentId = null) => {
   return categoriesList;
 };
 
-exports.createCategory = (req, res) => {
+exports.createCategory = async (req, res) => {
   const data = {
     owner: req.user._id,
     name: req.body.name,
@@ -45,7 +46,23 @@ exports.createCategory = (req, res) => {
   }
 
   if (req.file) {
-    data.categoryImg = req.file.filename;
+    let attempt = {
+      imageName: req.file.originalname,
+      imageUrl: req.file.path,
+      imageId: "",
+    };
+
+    const img = await cloud.uploads(attempt.imageUrl).then(result => {
+      let imageDetails = {
+        imageName: req.file.originalname,
+        imageUrl: result.url,
+        imageId: result.id,
+      };
+
+      return imageDetails
+    })
+    data.categoryImg = img;
+
   }
 
   const category = new Category(data);
@@ -96,7 +113,7 @@ exports.getProductsByCat = (req, res) => {
   });
 };
 
-exports.updateCategory = (req, res) => {
+exports.updateCategory = async (req, res) => {
   const data = {
     _id: req.body._id,
     name: req.body.name,
@@ -112,8 +129,25 @@ exports.updateCategory = (req, res) => {
   }
 
   if (req.file) {
-    data.categoryImg = req.file.filename;
+    let attempt = {
+      imageName: req.file.originalname,
+      imageUrl: req.file.path,
+      imageId: "",
+    };
+
+    const img = await cloud.uploads(attempt.imageUrl).then(result => {
+      let imageDetails = {
+        imageName: req.file.originalname,
+        imageUrl: result.url,
+        imageId: result.id,
+      };
+
+      return imageDetails
+    })
+    data.categoryImg = img;
+
   }
+
 
   Category.findOneAndUpdate({ _id: data._id }, data, {
     returnOriginal: false,

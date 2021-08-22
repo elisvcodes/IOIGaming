@@ -1,7 +1,8 @@
 const Page = require('../models/page');
 const slugify = require('slugify');
+const cloud = require('../middleware/cloudinaryConfig');
 
-exports.createPage = (req, res) => {
+exports.createPage = async (req, res) => {
   const data = {
     owner: req.user._id,
     name: req.body.name,
@@ -15,10 +16,27 @@ exports.createPage = (req, res) => {
     data.heroImageLinkTo = req.body.heroImageLinkTo;
   }
 
-  if (req.file) {
-    data.heroImage = req.file.filename;
-  }
+  
 
+  if (req.file) {
+    let attempt = {
+      imageName: req.file.originalname,
+      imageUrl: req.file.path,
+      imageId: "",
+    };
+
+    const img = await cloud.uploads(attempt.imageUrl).then(result => {
+      let imageDetails = {
+        imageName: req.file.originalname,
+        imageUrl: result.url,
+        imageId: result.id,
+      };
+
+      return imageDetails
+    })
+    data.heroImage = img;
+
+  }
   const page = new Page(data);
 
   page.save((err, result) => {
@@ -47,7 +65,7 @@ exports.getPage = (req, res) => {
   });
 };
 
-exports.updatePage = (req, res) => {
+exports.updatePage = async(req, res) => {
   const data = {
     _id: req.body._id,
     name: req.body.name,
@@ -62,7 +80,22 @@ exports.updatePage = (req, res) => {
   }
 
   if (req.file) {
-    data.heroImage = req.file.filename;
+    let attempt = {
+      imageName: req.file.originalname,
+      imageUrl: req.file.path,
+      imageId: "",
+    };
+
+    const img = await cloud.uploads(attempt.imageUrl).then(result => {
+      let imageDetails = {
+        imageName: req.file.originalname,
+        imageUrl: result.url,
+        imageId: result.id,
+      };
+
+      return imageDetails
+    })
+    data.heroImage = img;
   }
 
   Page.findOneAndUpdate({ _id: data._id }, data, {
