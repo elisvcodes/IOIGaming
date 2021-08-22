@@ -10,7 +10,7 @@ export default function Layout({ children, sidebar }) {
       <Container>
         <Grid container>
           <Grid item sm={12} md={3}>
-            <Filter />
+            <Filter items={sidebar.props} />
           </Grid>
           <Grid item sm={12} md={9}>
             {children}
