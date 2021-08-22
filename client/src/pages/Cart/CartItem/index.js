@@ -25,7 +25,7 @@ export default function CartItem({ item, setCartTotal }) {
       }}
     >
       <img
-        src={`http://localhost:7000/public/media/products/${item.productImg[0].img}`}
+        src={`${item.productImg[0].imageUrl}`}
         alt=''
         style={{
           width: '100px',

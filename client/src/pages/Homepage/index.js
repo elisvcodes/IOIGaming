@@ -2,15 +2,7 @@ import React, { useEffect } from 'react';
 import Layout from '../../components/Layout';
 import { useDispatch, useSelector } from 'react-redux';
 import { getPage } from '../../_actions/pages';
-import {
-  Container,
-  Grid,
-  Card,
-  CardMedia,
-  CardContent,
-  Typography,
-  Link,
-} from '@material-ui/core';
+import { Container, Grid, Link } from '@material-ui/core';
 import './styles.css';
 
 export default function Homepage() {
@@ -36,15 +28,17 @@ export default function Homepage() {
     return options;
   };
   const itrCategories = flattenArray(categories);
-
+  console.log(homepage);
   return (
     <Layout>
       <Container>
         <div className='hero'>
-          <img
-            src={`http://localhost:7000/public/media/pages/${homepage.heroImage}`}
-            alt='hero image'
-          />
+          <Link href={`${homepage.heroImageLinkTo}`}>
+            <img
+              src={homepage.heroImage && `${homepage.heroImage[0].imageUrl}`}
+              alt='hero image'
+            />
+          </Link>
         </div>
         <div>
           <h2>Featured Catgeories</h2>
@@ -59,7 +53,7 @@ export default function Homepage() {
                       color='textPrimary'
                     >
                       <img
-                        src={`http://localhost:7000/public/media/categories/${item.categoryImg}`}
+                        src={`${item.categoryImg[0].imageUrl}`}
                         alt={item.name}
                       />
                       <p>{item.name}</p>

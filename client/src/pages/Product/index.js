@@ -35,10 +35,11 @@ export default function Product(props) {
               >
                 {productData.productImg &&
                   productData.productImg.map((image, idx) => {
+                    console.log(image)
                     return (
                       <div className='slidercontainer' key={idx}>
                         <img
-                          src={`http://localhost:7000/public/media/products/${image.img}`}
+                          src={`${image.imageUrl}`}
                         />
                       </div>
                     );
