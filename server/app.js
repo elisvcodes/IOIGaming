@@ -3,7 +3,7 @@ const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const path = require('path');
 const app = express();
-require('dotenv').config()
+require('dotenv').config();
 
 require('./db/db');
 
@@ -32,5 +32,11 @@ app.use('/api/v1/cart', require('./routes/cart'));
 
 // Page middleware
 app.use('/api/v1/page', require('./routes/page'));
+
+// Payments middleware
+app.use('/api/v1/payments', require('./routes/payments'));
+
+// Orders middleware
+// app.use('/api/v1/orders', require('./routes/orders'));
 
 app.listen(7000);
