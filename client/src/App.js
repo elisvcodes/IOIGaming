@@ -9,6 +9,10 @@ import { useDispatch } from 'react-redux';
 import { getCategories } from './_actions/categories';
 import { getCart } from './_actions/cart';
 import Checkout from './pages/Checkout/index';
+import { Elements } from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
+const promise = loadStripe(`${process.env.REACT_APP_STRIPE_KEY}`);
+// console.log(promise);
 export default function App() {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -24,7 +28,14 @@ export default function App() {
         <Route path='/cat/:slug' component={Categories} />
         <Route path='/products/:slug' component={Product} />
         <Route path='/cart' component={Cart} />
-        <Route path='/checkout' component={Checkout} />
+        <Route
+          path='/checkout'
+          render={(props) => (
+            <Elements stripe={promise}>
+              <Checkout {...props} />
+            </Elements>
+          )}
+        />
       </Switch>
     </div>
   );
