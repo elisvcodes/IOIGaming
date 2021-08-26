@@ -1,6 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import Layout from '../../components/Layout/index';
-import { Grid, Container, Card, Typography, Button } from '@material-ui/core';
+import { useHistory } from 'react-router-dom';
+import {
+  Grid,
+  Container,
+  Card,
+  Typography,
+  Button,
+  Link,
+} from '@material-ui/core';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
 import CartItem from './CartItem';
@@ -8,6 +16,7 @@ export default function Cart() {
   const cart = useSelector((state) => state.cart);
   const [cartItems, setCartItems] = useState();
   const [cartTotal, setCartTotal] = useState(0);
+  const history = useHistory();
   useEffect(async () => {
     const cartItemIds = cart.items.map((cart) => cart.item);
     const { data } = await axios.post(
@@ -58,7 +67,6 @@ export default function Cart() {
                 style={{
                   marginTop: '20px',
                   display: 'flex',
-                  // justifyContent: 'center',
                   flexDirection: 'column',
                   padding: '10px',
                   height: '230px',
@@ -114,7 +122,17 @@ export default function Cart() {
                     </Typography>
                   </div>
                 </div>
-                <Button variant='contained' color='primary'>
+                <Button
+                  variant='contained'
+                  color='primary'
+                  fullWidth
+                  onClick={() =>
+                    history.push({
+                      pathname: '/checkout',
+                      state: { cart, cartTotal },
+                    })
+                  }
+                >
                   Checkout
                 </Button>
               </Card>

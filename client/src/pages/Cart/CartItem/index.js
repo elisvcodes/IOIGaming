@@ -21,7 +21,7 @@ export default function CartItem({ item, setCartTotal }) {
         margin: '20px 0 ',
         display: 'flex',
         alignItems: 'center',
-        width: '95%',
+        width: '99%',
       }}
     >
       <img
