@@ -9,25 +9,25 @@ export default function Layout({ children, sidebar }) {
       <Header />
       <Container>
         <Grid container>
-          <Grid item sm={12} md={3}>
+          <Grid item xs={12} md={3}>
             <Filter items={sidebar.props} />
           </Grid>
           <Grid item sm={12} md={9}>
             {children}
           </Grid>
-          <Footer />
         </Grid>
+        <Footer />
       </Container>
     </>
   ) : (
     <>
       <Header />
       <Grid container>
-        <Grid item sm={12}>
+        <Grid item xs={12}>
           {children}
         </Grid>
-        <Footer />
       </Grid>
+      <Footer />
     </>
   );
 }
