@@ -20,7 +20,7 @@ export default function Cart() {
   useEffect(async () => {
     const cartItemIds = cart.items.map((cart) => cart.item);
     const { data } = await axios.post(
-      `http://localhost:7000/api/v1/cart/items`,
+      `https://${process.env.REACT_APP_BACKEND_URL}/api/v1/cart/items`,
       { cartItemIds }
     );
     setCartItems(data);

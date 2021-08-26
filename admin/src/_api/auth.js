@@ -1,13 +1,17 @@
 import axios from 'axios';
 
 export const login = (creds) =>
-  axios.post('http://localhost:7000/api/v1/user/login', creds, {
-    withCredentials: true,
-  });
+  axios.post(
+    `http://${process.env.REACT_APP_BACKEND_URL}/api/v1/user/login`,
+    creds,
+    {
+      withCredentials: true,
+    }
+  );
 
 export const logout = () =>
   axios.post(
-    'http://localhost:7000/api/v1/user/logout',
+    `http://${process.env.REACT_APP_BACKEND_URL}/api/v1/user/logout`,
     {},
     { withCredentials: true }
   );

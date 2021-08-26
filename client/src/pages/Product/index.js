@@ -13,7 +13,7 @@ export default function Product(props) {
   const dispatch = useDispatch();
   useEffect(async () => {
     const { data } = await axios.get(
-      `http://localhost:7000/api/v1/product/${props.match.params.slug}`
+      `https://${process.env.REACT_APP_BACKEND_URL}/api/v1/product/${props.match.params.slug}`
     );
     setProductData(data);
   }, []);
@@ -35,12 +35,10 @@ export default function Product(props) {
               >
                 {productData.productImg &&
                   productData.productImg.map((image, idx) => {
-                    console.log(image)
+                    console.log(image);
                     return (
                       <div className='slidercontainer' key={idx}>
-                        <img
-                          src={`${image.imageUrl}`}
-                        />
+                        <img src={`${image.imageUrl}`} />
                       </div>
                     );
                   })}

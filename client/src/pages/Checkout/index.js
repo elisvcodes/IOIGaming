@@ -29,7 +29,7 @@ export default function Checkout(props) {
 
   useEffect(() => {
     const { clientSecret } = axios.post(
-      'http://localhost:7000/api/v1/payments/payment',
+      `https://${process.env.REACT_APP_BACKEND_URL}/api/v1/payments/payment`,
       { total: props.location.state.cartTotal }
     );
     setClientSecret(clientSecret);

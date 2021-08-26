@@ -6,7 +6,7 @@ const app = express();
 require('dotenv').config();
 
 require('./db/db');
-
+const PORT = process.env.PORT || 8000;
 // required Middlewares
 app.use(
   cors({
@@ -39,4 +39,4 @@ app.use('/api/v1/payments', require('./routes/payments'));
 // Orders middleware
 // app.use('/api/v1/orders', require('./routes/orders'));
 
-app.listen(7000);
+app.listen(PORT);
