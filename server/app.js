@@ -6,12 +6,18 @@ const app = express();
 require('dotenv').config();
 
 require('./db/db');
-const PORT = process.env.PORT || 8000;
+
+const PORT = process.env.PORT || 7000;
+
 // required Middlewares
 app.use(
   cors({
     credentials: true,
-    origin: ['http://localhost:3000', 'http://localhost:3001'],
+    origin: [
+      'http://localhost:3000',
+      'http://localhost:3001',
+      'https://ioi.server.elisv.com',
+    ],
   })
 );
 app.use(express.json());
@@ -35,8 +41,5 @@ app.use('/api/v1/page', require('./routes/page'));
 
 // Payments middleware
 app.use('/api/v1/payments', require('./routes/payments'));
-
-// Orders middleware
-// app.use('/api/v1/orders', require('./routes/orders'));
 
 app.listen(PORT);
