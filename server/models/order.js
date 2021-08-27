@@ -12,6 +12,7 @@ const orderSchema = new mongoose.Schema({
   customerPhone: Number,
   itemsOrdered: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Product' }],
   orderTotal: Number,
+  hasShipped: { type: Boolean, default: false },
 });
 
 const Order = mongoose.model('Order', orderSchema);
