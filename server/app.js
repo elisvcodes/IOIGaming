@@ -12,12 +12,12 @@ const PORT = process.env.PORT || 7000;
 // required Middlewares
 app.use(
   cors({
-    credentials: true,
     origin: [
       'http://localhost:3000',
       'http://localhost:3001',
-      'https://ioi.server.elisv.com',
+      'https://ioi-admin.elisv.com',
     ],
+    credentials: true,
   })
 );
 app.use(express.json());

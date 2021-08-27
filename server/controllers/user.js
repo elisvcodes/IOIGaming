@@ -8,7 +8,10 @@ exports.signup = (req, res) => {
     }
     result.generateToken();
     const token = result.tokens[result.tokens.length - 1].token;
-    res.status(200).cookie('user_token_jwt', token).json(result);
+    res
+      .status(200)
+      .cookie('user_token_jwt', token, { secure: true })
+      .json(result);
   });
 };
 
@@ -23,7 +26,14 @@ exports.login = (req, res) => {
     if (correctPassword) {
       user.generateToken();
       const token = user.tokens[user.tokens.length - 1].token;
-      res.status(200).cookie('user_token_jwt', token).json(user);
+      res
+        .status(200)
+        .cookie('user_token_jwt', token, {
+          domain: '.elisv.com',
+          secure: true,
+          SameSite: 'lax',
+        })
+        .json(user);
     } else {
       res.status(200).json('Bad Login');
     }
@@ -44,7 +54,11 @@ exports.logout = (req, res) => {
       }
       res
         .status(200)
-        .clearCookie('user_token_jwt')
+        .clearCookie('user_token_jwt', {
+          domain: '.elisv.com',
+          secure: true,
+          SameSite: 'lax',
+        })
         .json({ msg: 'Logged out successfully' });
     });
   });
