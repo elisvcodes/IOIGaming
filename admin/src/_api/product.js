@@ -1,19 +1,20 @@
 import axios from 'axios';
+import config from '../util/config';
 
 export const createProduct = (data) =>
-  axios.post('http://localhost:7000/api/v1/product/create', data, {
+  axios.post(`${config.SERVER_URI}/api/v1/product/create`, data, {
     withCredentials: true,
   });
 
 export const getProducts = () =>
-  axios.get('http://localhost:7000/api/v1/product/', { withCredentials: true });
+  axios.get(`${config.SERVER_URI}/api/v1/product/`, { withCredentials: true });
 
 export const updateProduct = (data) =>
-  axios.patch('http://localhost:7000/api/v1/product/update', data, {
+  axios.patch(`${config.SERVER_URI}/api/v1/product/update`, data, {
     withCredentials: true,
   });
 
 export const deleteProduct = (id) =>
-  axios.delete(`http://localhost:7000/api/v1/product/${id}`, {
+  axios.delete(`${config.SERVER_URI}/api/v1/product/${id}`, {
     withCredentials: true,
   });

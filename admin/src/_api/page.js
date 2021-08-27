@@ -1,21 +1,22 @@
 import axios from 'axios';
-
+import config from '../util/config';
+console.log(config);
 export const createPage = (data) =>
-  axios.post('http://localhost:7000/api/v1/page/create', data, {
+  axios.post(`${config.SERVER_URI}/api/v1/page/create`, data, {
     withCredentials: true,
   });
 
 export const getPages = () =>
-  axios.get('http://localhost:7000/api/v1/page', {
+  axios.get(`${config.SERVER_URI}/api/v1/page`, {
     withCredentials: true,
   });
 
 export const updatePage = (data) =>
-  axios.patch('http://localhost:7000/api/v1/page/update', data, {
+  axios.patch(`${config.SERVER_URI}/api/v1/page/update`, data, {
     withCredentials: true,
   });
 
 export const deletePage = (id) =>
-  axios.delete(`http://localhost:7000/api/v1/page/${id}`, {
+  axios.delete(`${config.SERVER_URI}/api/v1/page/${id}`, {
     withCredentials: true,
   });
