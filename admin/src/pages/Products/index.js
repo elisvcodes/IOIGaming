@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
 
-import {  makeStyles, Avatar } from '@material-ui/core';
+import { makeStyles, Avatar } from '@material-ui/core';
 import Layout from '../../components/Layout/index';
 import { useSelector, useDispatch } from 'react-redux';
-import {
-  deleteProduct,
-} from '../../_actions/product';
+import { deleteProduct } from '../../_actions/product';
 import { DataGrid } from '@material-ui/data-grid';
 import { GrDocumentImage } from 'react-icons/gr';
 import * as dayjs from 'dayjs';
@@ -48,9 +46,6 @@ export default function Products() {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const [open, setOpen] = useState(false);
-  const [requestUpdate, setRequestUpdate] = useState(false);
-
   const [productData, setProductData] = useState({
     _id: '',
     name: '',
@@ -80,27 +75,6 @@ export default function Products() {
     setProductCategories(event.target.value);
   };
 
-  // const handleOpen = () => {
-  //   setOpen(true);
-  // };
-  // const handleClose = () => {
-  //   setTimeout(() => {
-  //     setOpen(false);
-  //     setProductData({
-  //       _id: '',
-  //       name: '',
-  //       slug: '',
-  //       shortDescription: '',
-  //       longDescription: '',
-  //       price: '',
-  //       sku: '',
-  //       quantity: '',
-  //       isFeatured: false,
-  //     });
-  //     setProductCategories([]);
-  //   }, 100);
-  // };
-
   const onSubmit = (e) => {
     e.preventDefault();
 
@@ -119,14 +93,6 @@ export default function Products() {
     if (productImgs.length > 0) {
       productImgs.map((img) => form.append('productImgs', img));
     }
-
-    // if (requestUpdate) {
-    //   dispatch(updateProduct(form));
-    //   setRequestUpdate(false);
-    // } else {
-    //   dispatch(createProduct(form));
-    // }
-    // handleClose();
   };
 
   const flattenCategories = (categories, options = []) => {
@@ -250,10 +216,13 @@ export default function Products() {
 
   const rows = (products) => {
     return products.map((product) => {
-      console.log(product)
+      console.log(product);
       return {
         id: product._id,
-        image: product.productImg.length > 0 ? `${product.productImg[0].imageUrl}` : '',
+        image:
+          product.productImg.length > 0
+            ? `${product.productImg[0].imageUrl}`
+            : '',
         // image: `${product.productImg[0].img}`,
         // product.productImg.length > 0 ?  `${product.productImg[0].imageUrl}` : ''  ,
         name: product.name,
@@ -373,32 +342,17 @@ export default function Products() {
       <Layout sidebar>
         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
           <h3>Products</h3>
-          <Link to="/products/add">
-          <button
-            style={{
-              padding: '1px 20px',
-              margin: '15px',
-              cursor: 'pointer',
-            }}
-          >
-            Add
-          </button>
+          <Link to='/products/add'>
+            <button
+              style={{
+                padding: '1px 20px',
+                margin: '15px',
+                cursor: 'pointer',
+              }}
+            >
+              Add
+            </button>
           </Link>
-
-          {/* <Modal
-            open={open}
-            onClose={handleClose}
-            aria-labelledby='product-model'
-            aria-describedby='product-model-description'
-          >
-            <div style={getModalStyle()} className={classes.paper}>
-              <h3>Add Product</h3>
-              {productImgs.map((img, inx) => (
-                <div key={inx}>{img.name}</div>
-              ))}
-              <Form onSubmit={onSubmit} fields={inputFields} />
-            </div>
-          </Modal> */}
         </div>
         <div>
           <DataGrid
