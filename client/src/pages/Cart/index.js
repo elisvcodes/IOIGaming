@@ -12,6 +12,7 @@ import {
 import { useSelector } from 'react-redux';
 import axios from 'axios';
 import CartItem from './CartItem';
+import config from '../../util/config';
 export default function Cart() {
   const cart = useSelector((state) => state.cart);
   const [cartItems, setCartItems] = useState();
@@ -20,7 +21,7 @@ export default function Cart() {
   useEffect(async () => {
     const cartItemIds = cart.items.map((cart) => cart.item);
     const { data } = await axios.post(
-      `https://${process.env.REACT_APP_BACKEND_URL}/api/v1/cart/items`,
+      `${config.SERVER_URI}/api/v1/cart/items`,
       { cartItemIds }
     );
     setCartItems(data);
