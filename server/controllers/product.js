@@ -13,10 +13,10 @@ exports.createProduct = async (req, res) => {
     longDescription: req.body.longDescription,
     categoryId: Array.isArray(req.body.categoryId)
       ? req.body.categoryId.map((id) => {
-        return {
-          id: mongoose.Types.ObjectId(id),
-        };
-      })
+          return {
+            id: mongoose.Types.ObjectId(id),
+          };
+        })
       : { id: mongoose.Types.ObjectId(req.body.categoryId) },
     price: req.body.price,
     sku: req.body.sku,
@@ -29,29 +29,27 @@ exports.createProduct = async (req, res) => {
   }
 
   if (req.files.length > 0) {
-
     const fileUploads = async (from, to = []) => {
       for (const file of from) {
         let attempt = {
           imageName: file.originalname,
           imageUrl: file.path,
-          imageId: "",
+          imageId: '',
         };
-        await cloud.uploads(attempt.imageUrl).then(result => {
+        await cloud.uploads(attempt.imageUrl).then((result) => {
           let imageDetails = {
             imageName: file.originalname,
             imageUrl: result.url,
             imageId: result.id,
           };
-          to.push(imageDetails)
-        })
+          to.push(imageDetails);
+        });
       }
 
-      return to
-    }
+      return to;
+    };
 
-
-    data.productImg = await fileUploads(req.files)
+    data.productImg = await fileUploads(req.files);
   }
 
   const product = new Product(data);
@@ -64,7 +62,11 @@ exports.createProduct = async (req, res) => {
 };
 
 exports.getProducts = (req, res) => {
-  Product.find({}).exec((err, result) => {
+  const query = req.query.q || '';
+  const keyword = query
+    ? { longDescription: { $regex: query, $options: 'i' } }
+    : {};
+  Product.find({ ...keyword }).exec((err, result) => {
     if (err) {
       return res.status(400).json(err);
     }
@@ -92,10 +94,10 @@ exports.updateProduct = async (req, res) => {
     longDescription: req.body.longDescription,
     categoryId: Array.isArray(req.body.categoryId)
       ? req.body.categoryId.map((id) => {
-        return {
-          id: mongoose.Types.ObjectId(id),
-        };
-      })
+          return {
+            id: mongoose.Types.ObjectId(id),
+          };
+        })
       : { id: mongoose.Types.ObjectId(req.body.categoryId) },
 
     price: req.body.price,
@@ -108,33 +110,28 @@ exports.updateProduct = async (req, res) => {
     data.shortDescription = req.body.shortDescription;
   }
 
-
-
   if (req.files.length > 0) {
-
-
     const fileUploads = async (from, to = []) => {
       for (const file of from) {
         let attempt = {
           imageName: file.originalname,
           imageUrl: file.path,
-          imageId: "",
+          imageId: '',
         };
-        await cloud.uploads(attempt.imageUrl).then(result => {
+        await cloud.uploads(attempt.imageUrl).then((result) => {
           let imageDetails = {
             imageName: file.originalname,
             imageUrl: result.url,
             imageId: result.id,
           };
-          to.push(imageDetails)
-        })
+          to.push(imageDetails);
+        });
       }
 
-      return to
-    }
+      return to;
+    };
 
-
-    data.productImg = await fileUploads(req.files)
+    data.productImg = await fileUploads(req.files);
   }
 
   Product.findOneAndUpdate({ _id: data.id }, data, {
