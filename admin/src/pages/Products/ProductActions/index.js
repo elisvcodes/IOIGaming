@@ -62,7 +62,9 @@ export default function ProductActions(props) {
     e.preventDefault();
 
     const form = new FormData();
-    form.append('_id', productData._id);
+    if (productData._id != '') {
+      form.append('_id', productData._id);
+    }
     form.append('name', productData.name);
     form.append('slug', productData.slug);
     form.append('shortDescription', productData.shortDescription);
