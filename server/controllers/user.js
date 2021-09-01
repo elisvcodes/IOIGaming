@@ -29,7 +29,7 @@ exports.login = (req, res) => {
       res
         .status(200)
         .cookie('user_token_jwt', token, {
-          domain: '.elisv.com',
+          // domain: ['.elisv.com', 'localhost:3001'],
           secure: true,
           SameSite: 'lax',
         })
@@ -55,7 +55,7 @@ exports.logout = (req, res) => {
       res
         .status(200)
         .clearCookie('user_token_jwt', {
-          domain: '.elisv.com',
+          // domain: ['.elisv.com', 'localhost:3001'],
           secure: true,
           SameSite: 'lax',
         })
