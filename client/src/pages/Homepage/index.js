@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getPage } from '../../_actions/pages';
 import { Container, Grid, Link } from '@material-ui/core';
 import './styles.css';
-console.log(process.env.DOMAIN);
 export default function Homepage() {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -28,7 +27,6 @@ export default function Homepage() {
     return options;
   };
   const itrCategories = flattenArray(categories);
-  console.log(homepage);
   return (
     <Layout>
       <Container>
