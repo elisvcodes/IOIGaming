@@ -7,13 +7,14 @@ import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import { Carousel } from 'react-responsive-carousel';
 import { addToCart } from '../../_actions/cart';
 import { useDispatch } from 'react-redux';
+import config from '../../util/config';
 
 export default function Product(props) {
   const [productData, setProductData] = useState({});
   const dispatch = useDispatch();
   useEffect(async () => {
     const { data } = await axios.get(
-      `https://${process.env.REACT_APP_BACKEND_URL}/api/v1/product/${props.match.params.slug}`
+      `${config.SERVER_URI}/api/v1/product/${props.match.params.slug}`
     );
     setProductData(data);
   }, []);
@@ -35,7 +36,6 @@ export default function Product(props) {
               >
                 {productData.productImg &&
                   productData.productImg.map((image, idx) => {
-                    console.log(image);
                     return (
                       <div className='slidercontainer' key={idx}>
                         <img src={`${image.imageUrl}`} />
