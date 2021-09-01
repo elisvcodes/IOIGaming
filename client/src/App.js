@@ -5,14 +5,18 @@ import Homepage from './pages/Homepage/index';
 import Categories from './pages/Categories/index';
 import Product from './pages/Product/index';
 import Cart from './pages/Cart/index';
+import OrderConfirmation from './pages/OrderConfirmation/index';
+import Checkout from './pages/Checkout/index';
+import SearchResult from './pages/SearchResult/index';
+
 import { useDispatch } from 'react-redux';
 import { getCategories } from './_actions/categories';
 import { getCart } from './_actions/cart';
-import Checkout from './pages/Checkout/index';
+
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
-const promise = loadStripe(`${process.env.REACT_APP_STRIPE_KEY}`);
-// console.log(promise);
+
+const promise = loadStripe(`${process.env.REACT_APP_STRIPE_P_KEY}`);
 export default function App() {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -36,6 +40,8 @@ export default function App() {
             </Elements>
           )}
         />
+        <Route path='/order-confirmation' component={OrderConfirmation} />
+        <Route path='/search' component={SearchResult} />
       </Switch>
     </div>
   );
