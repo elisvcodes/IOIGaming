@@ -40,6 +40,9 @@ app.use('/api/v1/cart', require('./routes/cart'));
 app.use('/api/v1/page', require('./routes/page'));
 
 // Payments middleware
-app.use('/api/v1/payments', require('./routes/payments'));
+app.use('/api/v1/payments', require('./routes/payment'));
+
+// Order middleware
+app.use('/api/v1/orders', require('./routes/order'));
 
 app.listen(PORT);
