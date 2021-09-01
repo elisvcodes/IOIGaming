@@ -6,13 +6,17 @@ import {
   Container,
   Link,
 } from '@material-ui/core';
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { AiOutlineShoppingCart } from 'react-icons/ai';
 import './style.css';
+import { AiOutlineSearch } from 'react-icons/ai';
+
 export default function Header() {
   const cart = useSelector((state) => state.cart);
-  const totalCartItems = cart.items;
+  const [q, setQ] = useState('');
+  const history = useHistory();
   return (
     <>
       <AppBar position='relative' elevation={0}>
@@ -28,16 +32,41 @@ export default function Header() {
                 IoI
               </Link>
             </Typography>
-            <InputBase
-              placeholder='Search…'
-              inputProps={{ 'aria-label': 'search' }}
+            <form
+              action=''
+              onSubmit={(e) => history.push(`/search/?q=${q}`)}
               style={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
                 width: '500px',
-                borderRadius: '1%',
-                paddingLeft: '15px',
-                background: 'white',
               }}
-            />
+            >
+              <InputBase
+                placeholder='Search…'
+                name='q'
+                value={q}
+                onChange={(e) => setQ(e.target.value)}
+                inputProps={{ 'aria-label': 'search' }}
+                style={{
+                  borderRadius: '1%',
+                  background: 'white',
+                }}
+                startAdornment={
+                  <button
+                    style={{
+                      border: 'none',
+                      background: 'none',
+                      cursor: 'pointer',
+                    }}
+                    type='submit'
+                  >
+                    <AiOutlineSearch color='black' size={20} />
+                  </button>
+                }
+                fullWidth
+              />
+            </form>
             <Typography component={'span'}>
               <div className='cartIcon'>
                 <Link href='/cart' color='inherit'>
