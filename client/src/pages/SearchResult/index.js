@@ -17,6 +17,7 @@ export default function SearchResult(props) {
   if (results.loading) {
     return 'loading';
   }
+
   return (
     <>
       <Layout sidebar={{ props: results.result }}>
