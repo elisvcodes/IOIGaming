@@ -9,8 +9,8 @@ export default function Filter(props) {
     values: [],
     loading: false,
   });
-  const categories = useSelector((state) => state.categories);
-
+  const categoriesState = useSelector((state) => state.categoriesReducer);
+  const { categories, isFetching } = categoriesState;
   useEffect(() => {
     setMin({ calculating: true });
     setMax({ calculating: true });

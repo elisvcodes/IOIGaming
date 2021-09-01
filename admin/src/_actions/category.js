@@ -8,8 +8,11 @@ export const createCategory = (catData) => async (dispatch) => {
 };
 
 export const getCategories = () => async (dispatch) => {
+  dispatch({ type: 'GET_CATEGORIES_REQUEST' });
   const { data, status } = await API.getCategories();
-  dispatch({ type: 'GET_CATEGORIES', payload: data });
+  if (status === 200) {
+    dispatch({ type: 'GET_CATEGORIES', payload: data });
+  }
 };
 
 export const updateCategory = (updatedCatData) => async (dispatch) => {

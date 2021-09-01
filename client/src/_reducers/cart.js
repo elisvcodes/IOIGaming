@@ -8,7 +8,7 @@ export default (cart = cartStorage, action) => {
     case 'ADD_TO_CART':
       if (cart.items.length > 0) {
         const itemInCart = cart.items.find(
-          (cartItems) => cartItems.item == action.payload.item
+          (cartItems) => cartItems.item === action.payload.item
         );
 
         if (!itemInCart) {

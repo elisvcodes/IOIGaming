@@ -6,8 +6,8 @@ import { Container } from '@material-ui/core';
 import { createProduct, updateProduct } from '../../../_actions/product';
 export default function ProductActions(props) {
   console.log(props);
-  const categories = useSelector((state) => state.categories);
-
+  const categoriesReducer = useSelector((state) => state.categoriesReducer);
+  const { categories, fetching } = categoriesReducer;
   const dispatch = useDispatch();
 
   const [requestUpdate, setRequestUpdate] = useState(false);
@@ -222,6 +222,11 @@ export default function ProductActions(props) {
     console.log(updatedImagesArray);
     setProductImgs(updatedImagesArray);
   };
+
+  if (fetching) {
+    return 'loading';
+  }
+
   return (
     <>
       <Layout sidebar>

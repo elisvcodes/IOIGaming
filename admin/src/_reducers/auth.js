@@ -1,17 +1,25 @@
-export default (auth = { user: {}, isLoggedIn: false }, action) => {
+const initState = { user: {}, isLoggedIn: false, fetching: false };
+export const authReducer = (state = initState, action) => {
   switch (action.type) {
+    case 'BEGIN_AUTH':
+      return {
+        ...state,
+        fetching: true,
+      };
     case 'AUTH':
       return {
-        ...auth,
+        ...state,
         user: action.payload,
         isLoggedIn: true,
+        fetching: false,
       };
     case 'isLoggedIn':
       return {
-        ...auth,
+        ...state,
         isLoggedIn: action.payload,
+        fetching: false,
       };
     default:
-      return auth;
+      return state;
   }
 };

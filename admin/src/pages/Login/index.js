@@ -20,8 +20,10 @@ export default function Login() {
 
   const dispatch = useDispatch();
 
-  const auth = useSelector((state) => state.auth);
+  const authReducer = useSelector((state) => state.authReducer);
+  const { user, fetching, isLoggedIn } = authReducer;
 
+  console.log(authReducer);
   const onChange = (e) => {
     const { name, value } = e.target;
     setCreds({ ...creds, [name]: value });
@@ -32,8 +34,8 @@ export default function Login() {
     dispatch(login(creds));
   };
 
-  if (auth.isLoggedIn) {
-    return <Redirect to="/" />;
+  if (isLoggedIn) {
+    return <Redirect to='/' />;
   }
 
   const fields = [

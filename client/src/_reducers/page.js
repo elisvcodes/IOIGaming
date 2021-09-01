@@ -1,9 +1,11 @@
-export default (page = {}, action) => {
+const initState = { page: {}, isFetching: false };
+export const pageReducer = (state = initState, action) => {
   switch (action.type) {
+    case 'GET_PAGE_REQUEST':
+      return { ...state, isFetching: true };
     case 'GET_PAGE':
-      return action.payload;
-
+      return { ...state, page: action.payload, isFetching: false };
     default:
-      return page;
+      return state;
   }
 };

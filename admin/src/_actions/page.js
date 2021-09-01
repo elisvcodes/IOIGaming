@@ -1,12 +1,18 @@
 import * as API from '../_api/page';
 
 export const createPage = (pageData) => async (dispatch) => {
-  const { data, status } = await API.createPage(pageData);
+  const { status } = await API.createPage(pageData);
+  if (status === 200) {
+    dispatch(getPages());
+  }
 };
 
 export const getPages = () => async (dispatch) => {
+  dispatch({ type: 'GET_PAGES_REQUEST' });
   const { data, status } = await API.getPages();
-  dispatch({ type: 'GET_PAGES', payload: data });
+  if (status === 200) {
+    dispatch({ type: 'GET_PAGES', payload: data });
+  }
 };
 
 export const updatePage = (updatedPageData) => async (dispatch) => {

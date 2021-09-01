@@ -39,7 +39,9 @@ export default function Categories() {
 
   const [catImg, setCatImg] = useState('');
   const dispatch = useDispatch();
-  const categories = useSelector((state) => state.categories);
+
+  const categoriesReducer = useSelector((state) => state.categoriesReducer);
+  const { categories, fetching } = categoriesReducer;
 
   const onChange = (e) => {
     const { name, value } = e.target;
@@ -94,10 +96,11 @@ export default function Categories() {
 
   const rows = (categories, options = []) => {
     for (const cat of categories) {
-      console.log(cat.categoryImg.length > 0)
+      console.log(cat.categoryImg.length > 0);
       options.push({
         id: cat._id,
-        image: cat.categoryImg.length > 0 ?  `${cat.categoryImg[0].imageUrl}` : ''  ,
+        image:
+          cat.categoryImg.length > 0 ? `${cat.categoryImg[0].imageUrl}` : '',
         name: cat.name,
         description: cat.description,
         slug: cat.slug,
@@ -132,16 +135,18 @@ export default function Categories() {
         return params.value === 'undefined' ? (
           <GrDocumentImage size={30} style={{ marginRight: 'auto' }} />
         ) : (
-          console.log(params),
-          <Avatar
-            src={` ${params.value}`}
-            variant='square'
-            style={{
-              height: '50px',
-              width: '50px',
-              marginRight: 'auto',
-            }}
-          />
+          (console.log(params),
+          (
+            <Avatar
+              src={` ${params.value}`}
+              variant='square'
+              style={{
+                height: '50px',
+                width: '50px',
+                marginRight: 'auto',
+              }}
+            />
+          ))
         );
       },
     },
@@ -253,6 +258,10 @@ export default function Categories() {
       onChange: imgOnChange,
     },
   ];
+
+  if (fetching) {
+    return 'loading';
+  }
 
   return (
     <>

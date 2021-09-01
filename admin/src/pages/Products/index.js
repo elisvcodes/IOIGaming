@@ -40,8 +40,13 @@ const useStyles = makeStyles((theme) => ({
 export default function Products() {
   const classes = useStyles();
 
-  const categories = useSelector((state) => state.categories);
-  const products = useSelector((state) => state.products);
+  const categoriesReducer = useSelector((state) => state.categoriesReducer);
+  const { categories } = categoriesReducer;
+
+  const productsReducer = useSelector((state) => state.productsReducer);
+  const { products } = productsReducer;
+
+  const { fetching } = (categoriesReducer, productsReducer);
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -59,7 +64,6 @@ export default function Products() {
   });
 
   const [productCategories, setProductCategories] = useState([]);
-  console.log(productCategories);
   const onChange = (e) => {
     const { name, value } = e.target;
     setProductData({ ...productData, [name]: value });
@@ -336,6 +340,10 @@ export default function Products() {
       },
     },
   ];
+
+  if (fetching) {
+    return 'loading';
+  }
 
   return (
     <>

@@ -23,7 +23,8 @@ export default function Pages() {
   useEffect(() => {
     dispatch(getPages());
   }, []);
-  const pages = useSelector((state) => state.pages);
+  const pagesReducer = useSelector((state) => state.pagesReducer);
+  const { pages, fetching } = pagesReducer;
   const rows = (pages) => {
     return pages.map((page) => {
       return {
@@ -80,6 +81,10 @@ export default function Pages() {
       },
     },
   ];
+
+  if (fetching) {
+    return 'loading';
+  }
 
   return (
     <>

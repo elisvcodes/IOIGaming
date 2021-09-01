@@ -1,11 +1,11 @@
 import { combineReducers } from 'redux';
-import page from './page';
-import categories from './categories';
-import products from './products';
+import { pageReducer } from './page';
+import { categoriesReducer } from './categories';
+import { productReducer } from './products';
 import cart from './cart';
 export default combineReducers({
-  page,
-  categories,
-  products,
+  pageReducer,
+  categoriesReducer,
+  productReducer,
   cart,
 });

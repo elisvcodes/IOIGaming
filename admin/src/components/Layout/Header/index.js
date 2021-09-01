@@ -18,23 +18,24 @@ const useStyles = makeStyles({
 });
 export default function Header() {
   const classes = useStyles();
-  const auth = useSelector((state) => state.auth);
+  const authReducer = useSelector((state) => state.authReducer);
+  const { isLoggedIn } = authReducer;
   const dispatch = useDispatch();
   const history = useHistory();
   return (
     <>
-      <AppBar position="static">
+      <AppBar position='static'>
         <Toolbar>
-          <Typography variant="h6" style={{ flex: '1' }}>
+          <Typography variant='h6' style={{ flex: '1' }}>
             Admin Area
           </Typography>
           <MenuItem>
-            {auth.isLoggedIn ? (
-              <Button color="inherit" onClick={() => dispatch(logout(history))}>
+            {isLoggedIn ? (
+              <Button color='inherit' onClick={() => dispatch(logout(history))}>
                 Logout
               </Button>
             ) : (
-              <Button color="inherit">Login</Button>
+              <Button color='inherit'>Login</Button>
             )}
           </MenuItem>
         </Toolbar>

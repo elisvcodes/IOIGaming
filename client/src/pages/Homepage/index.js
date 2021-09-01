@@ -9,8 +9,14 @@ export default function Homepage() {
   useEffect(() => {
     dispatch(getPage('homepage'));
   }, []);
-  const homepage = useSelector((state) => state.page);
-  const categories = useSelector((state) => state.categories);
+
+  const homePageState = useSelector((state) => state.pageReducer);
+  const { page } = homePageState;
+
+  const categoriesState = useSelector((state) => state.categoriesReducer);
+  const { categories } = categoriesState;
+
+  const { isFetching } = (homePageState, categoriesState);
 
   const flattenArray = (array, options = []) => {
     for (const item of array) {
@@ -26,14 +32,18 @@ export default function Homepage() {
     }
     return options;
   };
-  const itrCategories = flattenArray(categories);
+
+  if (isFetching) {
+    return 'loading';
+  }
+
   return (
     <Layout>
       <Container>
         <div className='hero'>
-          <Link href={`${homepage.heroImageLinkTo}`}>
+          <Link href={`${page.heroImageLinkTo}`}>
             <img
-              src={homepage.heroImage && `${homepage.heroImage[0].imageUrl}`}
+              src={page.heroImage && `${page.heroImage[0].imageUrl}`}
               alt='hero image'
             />
           </Link>
@@ -41,7 +51,7 @@ export default function Homepage() {
         <div>
           <h2>Featured Catgeories</h2>
           <Grid container>
-            {itrCategories.map((item, idx) => {
+            {flattenArray(categories).map((item, idx) => {
               return item.isFeatured === 1 ? (
                 <Grid item xs={6} sm={3} key={idx}>
                   <div className='categoriesCard'>
