@@ -17,7 +17,7 @@ export default function Product(props) {
       `${config.SERVER_URI}/api/v1/product/${props.match.params.slug}`
     );
     setProductData(data);
-  }, []);
+  }, [dispatch]);
 
   return (
     <>
