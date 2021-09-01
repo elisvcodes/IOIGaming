@@ -49,20 +49,19 @@ exports.createCategory = async (req, res) => {
     let attempt = {
       imageName: req.file.originalname,
       imageUrl: req.file.path,
-      imageId: "",
+      imageId: '',
     };
 
-    const img = await cloud.uploads(attempt.imageUrl).then(result => {
+    const img = await cloud.uploads(attempt.imageUrl).then((result) => {
       let imageDetails = {
         imageName: req.file.originalname,
         imageUrl: result.url,
         imageId: result.id,
       };
 
-      return imageDetails
-    })
+      return imageDetails;
+    });
     data.categoryImg = img;
-
   }
 
   const category = new Category(data);
@@ -86,9 +85,7 @@ exports.getCategories = (req, res) => {
 };
 
 exports.getProductsByCat = (req, res) => {
-  console.log(req.query);
   Category.findOne({ slug: req.params.slug }).exec((err, result) => {
-    console.log(result);
     if (err) {
       return res.status(400).json({ msg: err });
     }
@@ -96,7 +93,6 @@ exports.getProductsByCat = (req, res) => {
     if (req.query.pmax) {
       match.pmax = req.query.pmax === { $gte: 250 };
     }
-    console.log(match);
 
     if (result !== null) {
       Product.find({
@@ -132,22 +128,20 @@ exports.updateCategory = async (req, res) => {
     let attempt = {
       imageName: req.file.originalname,
       imageUrl: req.file.path,
-      imageId: "",
+      imageId: '',
     };
 
-    const img = await cloud.uploads(attempt.imageUrl).then(result => {
+    const img = await cloud.uploads(attempt.imageUrl).then((result) => {
       let imageDetails = {
         imageName: req.file.originalname,
         imageUrl: result.url,
         imageId: result.id,
       };
 
-      return imageDetails
-    })
+      return imageDetails;
+    });
     data.categoryImg = img;
-
   }
-
 
   Category.findOneAndUpdate({ _id: data._id }, data, {
     returnOriginal: false,
