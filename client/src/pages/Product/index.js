@@ -14,7 +14,7 @@ export default function Product(props) {
   const dispatch = useDispatch();
   useEffect(async () => {
     const { data } = await axios.get(
-      `${config.SERVER_URI}/api/v1/product/${props.match.params.slug}`
+      `${config.SERVER_URI}/api/v1/product/product/${props.match.params.slug}`
     );
     setProductData(data);
   }, [dispatch]);
