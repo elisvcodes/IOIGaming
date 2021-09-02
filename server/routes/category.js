@@ -25,7 +25,7 @@ let upload = multer({ storage: storage });
 
 router.post('/create', protected, upload.single('categoryImg'), createCategory);
 router.get('/', getCategories);
-router.get('/:slug', getProductsByCat);
+// router.get('/:slug', getProductsByCat);
 
 router.patch(
   '/update',
