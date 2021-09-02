@@ -1,16 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Link, Select, MenuItem, Button, Slider } from '@material-ui/core';
-
-export default function Filter(props) {
+import { useHistory, Redirect } from 'react-router-dom';
+export default function Filter({ filter }) {
   const [min, setMin] = useState({ value: 0, calculating: false });
   const [max, setMax] = useState({ value: 0, calculating: false });
+  const history = useHistory();
+
   const [priceFilter, setPriceFilter] = useState({
     values: [],
     loading: false,
   });
   const categoriesState = useSelector((state) => state.categoriesReducer);
-  const { categories, isFetching } = categoriesState;
+  const { categories } = categoriesState;
   useEffect(() => {
     setMin({ calculating: true });
     setMax({ calculating: true });
@@ -35,8 +37,8 @@ export default function Filter(props) {
       return max;
     };
 
-    setMin({ value: findMin(props.items), calculating: false });
-    setMax({ value: findMax(props.items), calculating: false });
+    setMin({ value: findMin(filter.products), calculating: false });
+    setMax({ value: findMax(filter.products), calculating: false });
     setPriceFilter({ values: [min.value, max.value], loading: false });
   }, []);
 
@@ -55,7 +57,7 @@ export default function Filter(props) {
         <MenuItem value='Select'> Select Category</MenuItem>
 
         {categories.map((cat) => (
-          <MenuItem value={cat.name}>
+          <MenuItem value={cat.name} key={cat._id}>
             <Link href={`/cat/${cat.slug}`} key={cat._id}>
               <p>{cat.name}</p>
             </Link>
@@ -82,8 +84,24 @@ export default function Filter(props) {
             }
             style={{ width: '65%' }}
             onChange={handleChange}
+            step={20}
           />
-          <Button variant='contained' color='primary' size='small'>
+          <Button
+            variant='contained'
+            color='primary'
+            size='small'
+            onClick={() =>
+              filter.props.match.url !== '/search/'
+                ? history.push({
+                    pathname: `${filter.props.match.url}`,
+                    search: `?pmin=${priceFilter.values[0]}&pmax=${priceFilter.values[1]}`,
+                  })
+                : history.push({
+                    // pathname: `${filter.props.location.search}`,
+                    search: `${filter.props.location.search}&pmin=${priceFilter.values[0]}&pmax=${priceFilter.values[1]}`,
+                  })
+            }
+          >
             Filter
           </Button>
         </div>
