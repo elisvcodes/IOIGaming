@@ -75,6 +75,11 @@ export default function Sidebar() {
               <ListItemText primary='Pages' />
             </ListItem>
           </Link>
+          <Link to='/orders' className={classes.links}>
+            <ListItem button>
+              <ListItemText primary='Orders' />
+            </ListItem>
+          </Link>
         </List>
       </Drawer>
     </>
