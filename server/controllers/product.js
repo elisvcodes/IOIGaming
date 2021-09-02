@@ -1,4 +1,5 @@
 const Product = require('../models/product');
+const Category = require('../models/category');
 const slugify = require('slugify');
 const mongoose = require('mongoose');
 const cloud = require('../middleware/cloudinaryConfig');
@@ -61,17 +62,33 @@ exports.createProduct = async (req, res) => {
   });
 };
 
-exports.getProducts = (req, res) => {
+exports.getProducts = async (req, res) => {
   const query = req.query.q || '';
   const keyword = query
     ? { longDescription: { $regex: query, $options: 'i' } }
     : {};
-  Product.find({ ...keyword }).exec((err, result) => {
-    if (err) {
-      return res.status(400).json(err);
+
+  const max =
+    req.query.pmax && Number(req.query.pmax) !== 0 ? Number(req.query.pmax) : 0;
+  const min =
+    req.query.pmin && Number(req.query.pmin) !== 0 ? Number(req.query.pmin) : 0;
+
+  const categorySlug = req.params.slug || '';
+  const getCategory = await Category.findOne({ slug: categorySlug }).exec();
+  const categoryId = categorySlug
+    ? { 'categoryId.id': mongoose.Types.ObjectId(getCategory._id) }
+    : {};
+
+  const priceQueries = min && max ? { price: { $gte: min, $lte: max } } : {};
+
+  Product.find({ ...keyword, ...categoryId, ...priceQueries }).exec(
+    (err, result) => {
+      if (err) {
+        return res.status(400).json(err);
+      }
+      res.status(200).json(result);
     }
-    res.status(200).json(result);
-  });
+  );
 };
 
 exports.getSingleProduct = (req, res) => {
