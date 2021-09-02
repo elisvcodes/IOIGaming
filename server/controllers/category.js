@@ -84,30 +84,30 @@ exports.getCategories = (req, res) => {
   });
 };
 
-exports.getProductsByCat = (req, res) => {
-  Category.findOne({ slug: req.params.slug }).exec((err, result) => {
-    if (err) {
-      return res.status(400).json({ msg: err });
-    }
-    const match = {};
-    if (req.query.pmax) {
-      match.pmax = req.query.pmax === { $gte: 250 };
-    }
+// exports.getProductsByCat = (req, res) => {
+//   Category.findOne({ slug: req.params.slug }).exec((err, result) => {
+//     if (err) {
+//       return res.status(400).json({ msg: err });
+//     }
+//     const match = {};
+//     if (req.query.pmax) {
+//       match.pmax = req.query.pmax === { $gte: 250 };
+//     }
 
-    if (result !== null) {
-      Product.find({
-        'categoryId.id': mongoose.Types.ObjectId(result._id),
-      })
-        .populate({ path: req.params.slug, match })
-        .exec((err, products) => {
-          if (err) {
-            return res.status(400).json({ msg: err });
-          }
-          res.status(200).json(products);
-        });
-    }
-  });
-};
+//     if (result !== null) {
+//       Product.find({
+//         'categoryId.id': mongoose.Types.ObjectId(result._id),
+//       })
+//         .populate({ path: req.params.slug, match })
+//         .exec((err, products) => {
+//           if (err) {
+//             return res.status(400).json({ msg: err });
+//           }
+//           res.status(200).json(products);
+//         });
+//     }
+//   });
+// };
 
 exports.updateCategory = async (req, res) => {
   const data = {
