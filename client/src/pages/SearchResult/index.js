@@ -4,26 +4,26 @@ import Layout from '../../components/Layout/index';
 import axios from 'axios';
 import config from '../../util/config';
 import Products from '../../components/Products';
-export default function SearchResult(props) {
-  const [results, setResults] = useState({ result: [], loading: false });
-  useEffect(async () => {
-    setResults({ loading: true });
-    const products = await axios.get(
-      `${config.SERVER_URI}/api/v1/product/${props.location.search}`
-    );
-    setResults({ result: products.data, loading: false });
-  }, []);
+import { getProducts } from '../../_actions/products';
+import { useDispatch, useSelector } from 'react-redux';
 
-  if (results.loading) {
+export default function SearchResult(props) {
+  const dispatch = useDispatch();
+  useEffect(async () => {
+    dispatch(getProducts({ query: props.location.search }));
+  }, [dispatch, props.location]);
+  const productsState = useSelector((state) => state.productReducer);
+  const { products, isFetching } = productsState;
+  if (isFetching) {
     return 'loading';
   }
 
   return (
     <>
-      <Layout sidebar={{ props: results.result }}>
+      <Layout sidebar={{ products: products, props }}>
         <Container>
           <div style={{ marginTop: '20px' }}>
-            <Products products={results.result} />
+            <Products products={products} />
           </div>
         </Container>
       </Layout>
