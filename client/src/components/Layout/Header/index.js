@@ -39,7 +39,7 @@ export default function Header() {
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
-                width: '500px',
+                width: '70%',
               }}
             >
               <InputBase
