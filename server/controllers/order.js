@@ -25,3 +25,18 @@ exports.createOrder = (req, res) => {
     res.status(200).json(result.orderNumber);
   });
 };
+
+exports.getOrders = (req, res) => {
+  Order.find({}).exec((err, result) => {
+    if (err) {
+      return res.status(400).json({ msg: err });
+    }
+    res.status(200).json(result);
+  });
+};
+
+exports.updateOrder = (req, res) => {
+  Order.findByIdAndUpdate({ _id: req.body._id }, req.body, {
+    returnOriginal: false,
+  });
+};
