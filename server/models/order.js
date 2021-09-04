@@ -8,7 +8,7 @@ const orderNumber = () => {
 
 const orderSchema = new mongoose.Schema(
   {
-    orderNumber: { type: String, default: orderNumber() },
+    orderNumber: { type: String, default: () => orderNumber() },
     firstName: String,
     lastName: String,
     address: String,
