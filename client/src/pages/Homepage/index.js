@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import Layout from '../../components/Layout';
+import Layout from '../../components/Layout/index';
 import { useDispatch, useSelector } from 'react-redux';
 import { getPage } from '../../_actions/pages';
 import { Container, Grid, Link } from '@material-ui/core';

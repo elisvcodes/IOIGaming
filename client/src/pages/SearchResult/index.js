@@ -1,9 +1,7 @@
 import { Container } from '@material-ui/core';
 import React, { useState, useEffect } from 'react';
 import Layout from '../../components/Layout/index';
-import axios from 'axios';
-import config from '../../util/config';
-import Products from '../../components/Products';
+import Products from '../../components/Products/index';
 import { getProducts } from '../../_actions/products';
 import { useDispatch, useSelector } from 'react-redux';
 
