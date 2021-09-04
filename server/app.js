@@ -15,7 +15,7 @@ app.use(
     origin: [
       'http://localhost:3000',
       'http://localhost:3001',
-      'https://ioi-admin.elisv.com',
+      'https://ioigaming-admin.elisv.com',
     ],
     credentials: true,
   })
