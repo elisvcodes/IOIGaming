@@ -13,6 +13,8 @@ import {
 import './style.css';
 import config from '../../util/config';
 import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { clearCart } from '../../_actions/cart';
 
 export default function Checkout(props) {
   const [succeeded, setSucceeded] = useState(false);
@@ -24,6 +26,7 @@ export default function Checkout(props) {
   const stripe = useStripe();
   const elements = useElements();
   const history = useHistory();
+  const dispatch = useDispatch();
 
   const [customerInfo, setCustomerInfo] = useState({
     firstName: '',
@@ -34,7 +37,7 @@ export default function Checkout(props) {
     city: '',
     state: '',
     email: '',
-    phoneNumber: '',
+    phone: '',
   });
 
   const [itemsInCart] = useState(props.location.state.cart.items);
@@ -84,6 +87,7 @@ export default function Checkout(props) {
       },
       { withCredentials: true }
     );
+    dispatch(clearCart());
     history.push({
       pathname: '/order-confirmation',
       state: data,
@@ -210,10 +214,10 @@ export default function Checkout(props) {
                   <TextField
                     type='number'
                     label='Phone Number'
-                    name='phoneNumber'
+                    name='phone'
                     variant='outlined'
                     className='formItem'
-                    value={customerInfo.phoneNumber}
+                    value={customerInfo.phone}
                     onChange={customerInfoOnChange}
                   />
                 </div>
