@@ -43,6 +43,10 @@ export default (cart = cartStorage, action) => {
 
       return { ...cart };
 
+    case 'CLEAR':
+      localStorage.removeItem('cart');
+      return cart;
+
     default:
       return cart;
   }

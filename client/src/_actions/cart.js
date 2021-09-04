@@ -11,3 +11,7 @@ export const incrementItem = (item, quantity, total) => (dispatch) => {
 export const decrementItem = (item, quantity, total) => (dispatch) => {
   dispatch({ type: 'DECREMENT', payload: { item, quantity, total } });
 };
+
+export const clearCart = () => (dispatch) => {
+  dispatch({ type: 'CLEAR' });
+};
