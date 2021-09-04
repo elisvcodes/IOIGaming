@@ -5,8 +5,8 @@ import { Redirect } from 'react-router';
 import Cookies from 'js-cookie';
 
 export default function Privateroute({ component: Component, ...others }) {
-  const auth = useSelector((state) => state.auth);
-
+  const authReducer = useSelector((state) => state.authReducer);
+  console.log(authReducer);
   return (
     <>
       <Route
@@ -15,7 +15,7 @@ export default function Privateroute({ component: Component, ...others }) {
           Cookies.get('user_token_jwt') ? (
             <Component {...props} />
           ) : (
-            <Redirect to="/login" />
+            <Redirect to='/login' />
           )
         }
       />

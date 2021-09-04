@@ -2,10 +2,9 @@ import { makeStyles } from '@material-ui/core';
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import Layout from '../../components/Layout/index';
-import Inputs from '../../components/UI/inputs/index';
 import { login } from '../../_actions/auth';
 import { useSelector } from 'react-redux';
-import { Redirect } from 'react-router';
+import { Redirect } from 'react-router-dom';
 import Form from '../../components/UI/Form/index';
 const useStyles = makeStyles({
   input: {
@@ -21,9 +20,8 @@ export default function Login() {
   const dispatch = useDispatch();
 
   const authReducer = useSelector((state) => state.authReducer);
-  const { user, fetching, isLoggedIn } = authReducer;
+  const { isLoggedIn } = authReducer;
 
-  console.log(authReducer);
   const onChange = (e) => {
     const { name, value } = e.target;
     setCreds({ ...creds, [name]: value });

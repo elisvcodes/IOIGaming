@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 
-import { Drawer, ListItem, List, ListItemText } from '@material-ui/core/';
-import { Link } from 'react-router-dom';
+import { Drawer, ListItem, List, ListItemText, Link } from '@material-ui/core/';
+// import { Link } from 'react-router-dom';
 
 const drawerWidth = 240;
 
@@ -55,29 +55,29 @@ export default function Sidebar() {
         }}
       >
         <List>
-          <Link to='/' className={classes.links}>
+          <Link href='/' className={classes.links}>
             <ListItem button>
               <ListItemText primary='Home' />
             </ListItem>
           </Link>
-          <Link to='/categories' className={classes.links}>
+          <Link href='/orders' className={classes.links}>
+            <ListItem button>
+              <ListItemText primary='Orders' />
+            </ListItem>
+          </Link>
+          <Link href='/categories' className={classes.links}>
             <ListItem button>
               <ListItemText primary='Categories' />
             </ListItem>
           </Link>
-          <Link to='/products' className={classes.links}>
+          <Link href='/products' className={classes.links}>
             <ListItem button>
               <ListItemText primary='Products' />
             </ListItem>
           </Link>
-          <Link to='/pages' className={classes.links}>
+          <Link href='/pages' className={classes.links}>
             <ListItem button>
               <ListItemText primary='Pages' />
-            </ListItem>
-          </Link>
-          <Link to='/orders' className={classes.links}>
-            <ListItem button>
-              <ListItemText primary='Orders' />
             </ListItem>
           </Link>
         </List>

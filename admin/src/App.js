@@ -8,6 +8,7 @@ import Pages from './pages/Pages/index';
 import Orders from './pages/Orders/index';
 import PageActions from './pages/Pages/PageActions/index';
 import ProductActions from './pages/Products/ProductActions/index';
+import OrderActions from './pages/Orders/OrderActions/index';
 import { useDispatch } from 'react-redux';
 import { isLoggedIn } from './_actions/auth';
 import { getCategories } from './_actions/category';
@@ -23,7 +24,7 @@ function App() {
     dispatch(getCategories());
     dispatch(getProducts());
     dispatch(isLoggedIn());
-    dispatch(getOrders());
+    // dispatch(getOrders());
   }, []);
   return (
     <>
@@ -39,6 +40,7 @@ function App() {
         <Privateroute path='/pages/add' component={PageActions} />
         <Privateroute path='/pages/edit/:id' component={PageActions} />
         <Privateroute path='/pages' component={Pages} />
+        <Privateroute path='/orders/:on' component={OrderActions} />
         <Privateroute path='/orders' component={Orders} />
 
         <Route path='/login' component={Login} />

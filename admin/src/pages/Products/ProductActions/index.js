@@ -5,7 +5,6 @@ import Layout from '../../../components/Layout';
 import { Container } from '@material-ui/core';
 import { createProduct, updateProduct } from '../../../_actions/product';
 export default function ProductActions(props) {
-  console.log(props);
   const categoriesReducer = useSelector((state) => state.categoriesReducer);
   const { categories, fetching } = categoriesReducer;
   const dispatch = useDispatch();
