@@ -8,7 +8,14 @@ IOI (Pronounced Eye-O-Eye) is a fictional e-commerce platform that was built for
 
 ### 1. Dashboard
 
-![Registration](https://user-images.githubusercontent.com/69530035/132143117-39ee2945-0375-434b-9453-070481e0bcee.gif)
+![Dashboard](https://user-images.githubusercontent.com/69530035/132143117-39ee2945-0375-434b-9453-070481e0bcee.gif)
+Store owners have a dashboard where they can track their weekly orders, revenue, profit margin, and order average.
+
+### 2. Orders
+
+![Orders](https://user-images.githubusercontent.com/69530035/132143814-9b59422a-637e-44e7-bbd0-22033f091da5.gif)
+View order details such as shipping and bill address, the items that were purchased as well as their price per item, quantity and total.
+
 
 ### Built With
 
