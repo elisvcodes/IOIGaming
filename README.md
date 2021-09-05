@@ -18,7 +18,7 @@ View order details such as shipping and bill address, the items that were purcha
 
 ### 3. Categories
 
-![Categories](https://media3.giphy.com/media/auuxZA8fqhuXziqM4z/giphy.gif?cid=790b76112e09c1b5df9a6f128b2a8d1d302007482e00cd43&rid=giphy.gif&ct=g
+![Categories](https://media3.giphy.com/media/auuxZA8fqhuXziqM4z/giphy.gif?cid=790b76112e09c1b5df9a6f128b2a8d1d302007482e00cd43&rid=giphy.gif)
 Admin has the ability to create, update and delete categories as well as setting categories as featured so that they are shown on the homepage.
 
 
