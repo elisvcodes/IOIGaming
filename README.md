@@ -1,4 +1,5 @@
 # IOI Gaming
+<<<<<<< HEAD
 
 ![IOI HomePage](https://elisv.com/ioi.png)
 
@@ -49,3 +50,6 @@ Project Link: [https://ioi.elisv.com/](https://ioi.elisv.com/)
 ### License
 
 [MIT](https://choosealicense.com/licenses/mit/)
+=======
+Will update this tomorrow. 
+>>>>>>> 7839cb73d5731f7a25ef5f315612826bbaaa9a1d
