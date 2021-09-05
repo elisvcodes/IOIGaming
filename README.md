@@ -16,6 +16,12 @@ Store owners have a dashboard where they can track their weekly orders, revenue,
 ![Orders](https://user-images.githubusercontent.com/69530035/132143814-9b59422a-637e-44e7-bbd0-22033f091da5.gif)
 View order details such as shipping and bill address, the items that were purchased as well as their price per item, quantity and total.
 
+### 3. Categories
+
+![Categories](https://media3.giphy.com/media/auuxZA8fqhuXziqM4z/giphy.gif?cid=790b76112e09c1b5df9a6f128b2a8d1d302007482e00cd43&rid=giphy.gif&ct=g
+Admin has the ability to create, update and delete categories as well as setting categories as featured so that they are shown on the homepage.
+
+
 
 ### Built With
 
