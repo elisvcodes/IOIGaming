@@ -18,9 +18,8 @@ View order details such as shipping and bill address, the items that were purcha
 
 ### 3. Categories
 
-![Categories](https://p5uauq.bl.files.1drv.com/y4mRAMQXZsFDn332t_t0xSNsTrEkpes-TP9iFSZWtiecKZiZdMJpJpG1jw5Otm4UrLwdrVEMr4dNFIs89rakAB9vc1fWowMaAxhBLjGb6oa6eRlf7UkFB1Z2E9XjgIQealdTFUWZS6IhzrmFV29n1ui_2y30SVEetr95VL7VW0edLPcCk9ir9Tiv6lSDjcWt8NtLg7nDSxme26yNfUjbkpNRw/categories.gif)
+![Categories](https://user-images.githubusercontent.com/69530035/132144619-a56db613-5ca2-4c2e-8179-6118f1d3b3af.gif)
 Admin has the ability to create, update and delete categories as well as setting categories as featured so that they are shown on the homepage.
-
 
 
 ### Built With
