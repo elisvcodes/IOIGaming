@@ -1,5 +1,4 @@
 # IOI Gaming
-<<<<<<< HEAD
 
 ![IOI HomePage](https://elisv.com/ioi.png)
 
@@ -9,7 +8,7 @@ IOI (Pronounced Eye-O-Eye) is a fictional e-commerce platform that was built for
 
 ### 1. Dashboard
 
-![Registration](https://user-images.githubusercontent.com/69530035/123554105-898ae680-d74c-11eb-8426-96ee88b8e2ea.gif)
+![Registration](https://user-images.githubusercontent.com/69530035/132143117-39ee2945-0375-434b-9453-070481e0bcee.gif)
 
 ### Built With
 
