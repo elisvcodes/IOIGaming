@@ -16,6 +16,7 @@ app.use(
       'http://localhost:3000',
       'http://localhost:3001',
       'https://ioigaming-admin.elisv.com',
+      'https://ioi.elisv.com',
     ],
     credentials: true,
   })
