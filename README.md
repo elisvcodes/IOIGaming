@@ -26,7 +26,7 @@ Create, update and delete products. Upload as many images per product as you wan
 
 ### 5. Pages
 ![Products](https://user-images.githubusercontent.com/69530035/132147339-1fd05baf-1831-4897-9b4b-17495fb59dff.gif)
-Create unique pages that can be retrieved from the api. Retrievable data includes hero images, link to where the hero image is pointing to as well as create page description.
+Create unique pages that can be retrieved from the api. Retrievable data includes hero image, link to where the hero image is pointing to as well as page description.
 
 
 
