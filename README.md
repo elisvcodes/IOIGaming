@@ -20,6 +20,15 @@ View order details such as shipping and bill address, the items that were purcha
 ![Categories](https://user-images.githubusercontent.com/69530035/132146241-60b8d6c1-2948-4689-89a8-e3043e545b8e.gif)
 Admin has the ability to create, update and delete categories as well as setting categories as featured so that they are shown on the homepage.
 
+### 4. Products
+![Products](https://user-images.githubusercontent.com/69530035/132146700-721cadfe-37c1-4619-8bd4-cf89c0655d61.gif)
+Create, update and delete products. Upload as many images per product as you want as well have the ability to select multiple categories per product.
+
+### 5. Pages
+![Products](https://user-images.githubusercontent.com/69530035/132147339-1fd05baf-1831-4897-9b4b-17495fb59dff.gif)
+Create unique pages that can be retrieved from the api. Retrievable data includes hero images, link to where the hero image is pointing to as well as create page description.
+
+
 
 
 
