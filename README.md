@@ -17,26 +17,39 @@ Store owners have a dashboard where they can track their weekly orders, revenue,
 View order details such as shipping and bill address, the items that were purchased as well as their price per item, quantity and total.
 
 ### 3. Categories
+
 ![Categories](https://github.com/elisvcodes/IOIGaming/blob/master/categories.gif)
 Admin has the ability to create, update and delete categories as well as setting categories as featured so that they are shown on the homepage.
 
 ### 4. Products
+
 ![Products](https://user-images.githubusercontent.com/69530035/132146700-721cadfe-37c1-4619-8bd4-cf89c0655d61.gif)
 Create, update and delete products. Upload as many images per product as you want as well have the ability to select multiple categories per product.
 
 ### 5. Pages
+
 ![Products](https://user-images.githubusercontent.com/69530035/132147339-1fd05baf-1831-4897-9b4b-17495fb59dff.gif)
 Create unique pages that can be retrieved from the api. Retrievable data includes hero image, link to where the hero image is pointing to as well as page description.
 
+## Client Area
 
+### 1. Searching & Filtering
 
+Website visitors have the ability to search for different products as well as filter based on different categories and price ranges.
 
+### 2. Adding items to cart
 
-### Built With
+When you find something that catches your eye, you can add that said item into the cart and increment/decrement how many quantities of the item you want to buy.
 
-For this project, I chose to work with the mern stack and material UI. I also used other libraries that are listed in the Acknowledgements section.
+### 3. Checkout
 
-### Installation & Usage
+An e-commerce platform wouldn't be complete without a secure way to process payments. That's why I chose to use Stripe as my middleman that will process the payments. All orders are viable from the admin area. Also, each order is identified by a unique order number, which I think is very useful and cool to have.
+
+## Built With
+
+For this project, I chose to work with the mern stack and material UI.
+
+## Installation & Usage
 
 Before running this project locally, make sure to visit each folder and run the following command from the terminal:
 
@@ -50,27 +63,22 @@ Once all of the required packages are installed, visit each folder once again fr
 node app.js
 ```
 
-inside the client folder run:
+inside the client/admin folder run:
 
 ```
 npm start
 ```
 
-### Contributing
+## Contributing
 
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
 Please make sure to update tests as appropriate.
 
-### Contact
-
-Eli Sultanov - [@elisvcodes](https://twitter.com/elisvcodes)
+## Contact
 
 Project Link: [https://ioi.elisv.com/](https://ioi.elisv.com/)
 
-### License
+## License
 
-[MIT](https://choosealicense.com/licenses/mit/)
-=======
-Will update this tomorrow. 
->>>>>>> 7839cb73d5731f7a25ef5f315612826bbaaa9a1d
+# [MIT](https://choosealicense.com/licenses/mit/)
