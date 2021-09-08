@@ -18,7 +18,7 @@ View order details such as shipping and bill address, the items that were purcha
 
 ### 3. Categories
 
-![Categories](https://github.com/elisvcodes/IOIGaming/blob/master/categories.gif)
+![Categories](https://github.com/elisvcodes/IOIGaming/blob/master/gifs/categories.gif)
 Admin has the ability to create, update and delete categories as well as setting categories as featured so that they are shown on the homepage.
 
 ### 4. Products
@@ -35,13 +35,17 @@ Create unique pages that can be retrieved from the api. Retrievable data include
 
 ### 1. Searching & Filtering
 
+![searching](https://github.com/elisvcodes/IOIGaming/blob/master/gifs/searching.gif)
+
 Website visitors have the ability to search for different products as well as filter based on different categories and price ranges.
 
 ### 2. Adding items to cart
+![cart](https://github.com/elisvcodes/IOIGaming/blob/master/gifs/cart.gif)
 
 When you find something that catches your eye, you can add that said item into the cart and increment/decrement how many quantities of the item you want to buy.
 
 ### 3. Checkout
+![checkout](https://github.com/elisvcodes/IOIGaming/blob/master/gifs/checkout.gif)
 
 An e-commerce platform wouldn't be complete without a secure way to process payments. That's why I chose to use Stripe as my middleman that will process the payments. All orders are viable from the admin area. Also, each order is identified by a unique order number, which I think is very useful and cool to have.
 
