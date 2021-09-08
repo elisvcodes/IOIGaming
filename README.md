@@ -49,6 +49,11 @@ An e-commerce platform wouldn't be complete without a secure way to process paym
 
 For this project, I chose to work with the mern stack and material UI.
 
+## Known bugs/Future updates
+
+- The graph in the admin area needs to be updated to reflect each new week. For now, it seems to show all orders that are placed on any given weekday.
+- Not a bug, but a feature that will be added is a way to switch orders as shipped.
+
 ## Installation & Usage
 
 Before running this project locally, make sure to visit each folder and run the following command from the terminal:
@@ -81,4 +86,4 @@ Project Link: [https://ioi.elisv.com/](https://ioi.elisv.com/)
 
 ## License
 
-# [MIT](https://choosealicense.com/licenses/mit/)
+###### [MIT](https://choosealicense.com/licenses/mit/)
