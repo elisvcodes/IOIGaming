@@ -17,7 +17,7 @@ Store owners have a dashboard where they can track their weekly orders, revenue,
 View order details such as shipping and bill address, the items that were purchased as well as their price per item, quantity and total.
 
 ### 3. Categories
-![Categories](https://p5uauq.bl.files.1drv.com/y4mW_sOuT0--Er5xexIjR7xm6oOD0QgxYS8lolM3sogz4fskO6TDdzoGlTTaXsrMRUP4oNaEbgmFr23UOUw29ynXCXK3FJbmX0Fj58BC3mFYOO8OWLPSlrzseoSiKu42Dz1TtTlloUI9w0OFYNNo9unftrDyvWgF3bbNipXXPHgSJydgiPd7pkq4ZcebgMck8rBm4ECEtelHWCNvWFpBqTvsg/categories.gif)
+![Categories](https://github.com/elisvcodes/IOIGaming/blob/master/categories.gif)
 Admin has the ability to create, update and delete categories as well as setting categories as featured so that they are shown on the homepage.
 
 ### 4. Products
